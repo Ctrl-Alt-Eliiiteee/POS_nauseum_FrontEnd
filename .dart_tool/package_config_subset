@@ -34,6 +34,14 @@ fake_async
 2.12
 file:///home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/
 file:///home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/lib/
+hexcolor
+2.12
+file:///home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.3/
+file:///home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.3/lib/
+js
+2.12
+file:///home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/
+file:///home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib/
 matcher
 2.12
 file:///home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10/
@@ -90,4 +98,8 @@ flutter_test
 2.12
 file:///home/soham/snap/flutter/common/flutter/packages/flutter_test/
 file:///home/soham/snap/flutter/common/flutter/packages/flutter_test/lib/
+flutter_web_plugins
+2.12
+file:///home/soham/snap/flutter/common/flutter/packages/flutter_web_plugins/
+file:///home/soham/snap/flutter/common/flutter/packages/flutter_web_plugins/lib/
 2
