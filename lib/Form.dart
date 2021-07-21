@@ -64,8 +64,28 @@ List<String> clTeamDropDown = ['Team 1', 'Team 2', 'Team 3'];
 String posCode = '10.01.00 Traige';
 List<String> posCodeDropDown = [
   '10.01.00 Traige',
-  '20.05.01 Review',
-  '40.07.00 General Medicolegal'
+  '10.05.02 Risk Assessment',
+  '20.01.07 Psycoeducation',
+  '20.05.00 Pharmacotherapy Interventions',
+  '20.05.01 Review (pharmacotherapy)',
+  '20.05.02 Monitering (pharmacotherapy)',
+  '20.05.04 Coordination (pharmacotherapy)',
+  '20.08.00 Ongoing monitering and support',
+  '20.09.00 Crisis response',
+  '20.10.00 Family/Carer focused interventions',
+  '20.99.00 Support, interventions and therapies NEC',
+  '30.01.00 Coordination and Liaison',
+  '30.01.01 Referral coordination',
+  '30.01.02 Shared care',
+  '30.01.03 Interagency stakeholder meeting',
+  '30.01.04 Secondary consultation/education',
+  '40.01.00 MHA advice and education',
+  '40.02.00 MHA documentation and coordination',
+  '40.04.00 MHRT',
+  '40.04.01 MHRT report',
+  '40.06.00 QLD Civil and Administrative Tribunal',
+  '40.07.00 General Medicolegal',
+  '50.04.00 Triage/Intake review'
 ];
 
 String outcome = 'Other';
@@ -84,6 +104,8 @@ List<String> restuledInFormalReferralDropDown = [
   'No',
   'N/A',
 ];
+
+String comments;
 
 class _FormPageState extends State<FormPage> {
   @override
@@ -263,13 +285,7 @@ class _FormPageState extends State<FormPage> {
                       doctorName = value;
                     });
                   },
-                  controller: _doctorNameController,
-                  decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: _doctorNameController.clear,
-                        icon: Icon(Icons.clear),
-                      ),
-                      hintText: 'Enter name(s)'),
+                  decoration: InputDecoration(hintText: 'Enter name(s)'),
                 ),
               ),
               SizedBox(height: h * 0.02),
@@ -372,6 +388,22 @@ class _FormPageState extends State<FormPage> {
               customText(h, w, 'Resulted in formal referral'),
               SizedBox(height: h * 0.015),
               dropDownMenu(h, w, restuledInFormalReferralDropDown, 7),
+              SizedBox(
+                height: h * 0.02,
+              ),
+              customText(h, w, 'Comments'),
+              SizedBox(height: h * 0.015),
+              Padding(
+                padding: EdgeInsets.only(left: w * 0.035, right: 20),
+                child: TextFormField(
+                  onChanged: (value) {
+                    setState(() {
+                      comments = value;
+                    });
+                  },
+                  decoration: InputDecoration(hintText: 'Comments'),
+                ),
+              ),
               SizedBox(
                 height: h * 0.02,
               ),
