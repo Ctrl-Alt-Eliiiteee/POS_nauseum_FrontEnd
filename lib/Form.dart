@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pos/helperfunctions.dart';
 
 class FormPage extends StatefulWidget {
   @override
   _FormPageState createState() => _FormPageState();
 }
 
-String username = 'Soham';
+String username1 = 'Soham';
 
 String startDate = '___________';
 String startTime = '___________';
@@ -143,7 +144,7 @@ class _FormPageState extends State<FormPage> {
                                 text: 'User\n',
                                 style: TextStyle(color: Colors.black)),
                             TextSpan(
-                                text: username,
+                                text: username1,
                                 style: TextStyle(
                                     color: HexColor('#82cb70'),
                                     fontSize: w * 0.05))
@@ -253,6 +254,14 @@ class _FormPageState extends State<FormPage> {
                     if (_timeOfDay != null) {
                       setState(() {
                         sessionDuration = _timeOfDay.format(context);
+                        String ans="";
+                        for(int i=0;i<sessionDuration.length;i++){
+                          if(sessionDuration[i]==' '){
+                            break;
+                          }
+                          ans+=sessionDuration[i];
+                        }
+                        sessionDuration=ans;
                       });
                     }
                   },
@@ -279,13 +288,17 @@ class _FormPageState extends State<FormPage> {
               SizedBox(height: h * 0.01),
               Padding(
                 padding: EdgeInsets.only(left: w * 0.035, right: 20),
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      doctorName = value;
-                    });
-                  },
-                  decoration: InputDecoration(hintText: 'Enter name(s)'),
+                child: Flexible(
+                  child: TextFormField(
+                    minLines: null,
+                    maxLines: null,
+                    onChanged: (value) {
+                      setState(() {
+                        doctorName = value;
+                      });
+                    },
+                    decoration: InputDecoration(hintText: 'Enter name(s)'),
+                  ),
                 ),
               ),
               SizedBox(height: h * 0.02),
@@ -395,13 +408,17 @@ class _FormPageState extends State<FormPage> {
               SizedBox(height: h * 0.015),
               Padding(
                 padding: EdgeInsets.only(left: w * 0.035, right: 20),
-                child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      comments = value;
-                    });
-                  },
-                  decoration: InputDecoration(hintText: 'Comments'),
+                child: Flexible(
+                  child: TextFormField(
+                    minLines: null,
+                    maxLines: null,
+                    onChanged: (value) {
+                      setState(() {
+                        comments = value;
+                      });
+                    },
+                    decoration: InputDecoration(hintText: 'Comments'),
+                  ),
                 ),
               ),
               SizedBox(
@@ -421,7 +438,10 @@ class _FormPageState extends State<FormPage> {
                         style:
                             TextStyle(color: Colors.white, fontSize: h * 0.03),
                       ))),
-                  onPressed: () {},
+                  onPressed: () async {
+                    String ans = await uploadDetails();
+                    showSnackBar(ans);
+                  },
                 ),
               ),
               SizedBox(height: 100)
@@ -504,5 +524,10 @@ class _FormPageState extends State<FormPage> {
         ),
       ),
     );
+  }
+
+  void showSnackBar(String ans) {
+    final snackBar = SnackBar(content: Text(ans));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pos/Login.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  String username='', password1 ='',password2='';
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -44,6 +47,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: TextFormField(
                 decoration: InputDecoration(border: InputBorder.none),
+                onChanged: (status){
+                  username=status;
+                },
               ),
             ),
             SizedBox(height: h * 0.02),
@@ -63,6 +69,9 @@ class _SignUpPageState extends State<SignUpPage> {
               child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(border: InputBorder.none),
+                onChanged: (status){
+                  password1=status;
+                },
               ),
             ),
             SizedBox(height: h * 0.02),
@@ -82,6 +91,9 @@ class _SignUpPageState extends State<SignUpPage> {
               child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(border: InputBorder.none),
+                onChanged: (status){
+                  password2=status;
+                },
               ),
             ),
             SizedBox(height: h * 0.02),
@@ -97,11 +109,29 @@ class _SignUpPageState extends State<SignUpPage> {
                     "Sign Up",
                     style: TextStyle(color: Colors.white, fontSize: h * 0.03),
                   ))),
-              onPressed: () {},
+              onPressed: () async {
+                if(password1.length!=0&&password1==password2&&username.length!=0){
+                  try{
+                    print( username );
+                    print(password1);
+                    final user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: username, password: password1);
+                    await showsnackbar('Registration successful');
+                    MaterialPageRoute(builder: (context)=>LoginPage());
+                  }
+                  catch(e){
+                      showsnackbar(e);
+                  }
+                }
+              },
             )
           ],
         ),
       ),
     );
+  }
+
+  void showsnackbar(String s) {
+    final snackbar = SnackBar(content: Text(s));
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 }

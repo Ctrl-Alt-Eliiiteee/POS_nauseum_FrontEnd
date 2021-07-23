@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pos/Form.dart';
@@ -7,10 +8,11 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
+String username='',password='';
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -46,6 +48,9 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: TextFormField(
                 decoration: InputDecoration(border: InputBorder.none),
+                onChanged: (status){
+                  username=status;
+                },
               ),
             ),
             SizedBox(height: h * 0.02),
@@ -65,6 +70,9 @@ class _LoginPageState extends State<LoginPage> {
               child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(border: InputBorder.none),
+                onChanged: (status){
+                  password=status;
+                },
               ),
             ),
             SizedBox(height: h * 0.04),
@@ -80,9 +88,16 @@ class _LoginPageState extends State<LoginPage> {
                     "Login",
                     style: TextStyle(color: Colors.white, fontSize: h * 0.03),
                   ))),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FormPage()));
+              onPressed: () async {
+                try{
+                  final check = await FirebaseAuth.instance.signInWithEmailAndPassword(email: username, password: password);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FormPage()));
+                }
+                catch(e){
+                  showSnackBar(e);
+                }
+
               },
             ),
             SizedBox(height: h * 0.02),
@@ -107,5 +122,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void showSnackBar(e) {
+    final snackbar = SnackBar(content: Text(e));
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 }

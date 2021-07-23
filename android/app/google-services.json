@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "319175246115",
+    "project_id": "posnauseam",
+    "storage_bucket": "posnauseam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319175246115:android:c6874d67158d95290a8c96",
+        "android_client_info": {
+          "package_name": "com.example.pos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319175246115-rubdefn4ualsd57st3vaqhk6ptd5j43f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMuzPawVGPfM-pTKD_WzS-rPcqDQb04GY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "319175246115-rubdefn4ualsd57st3vaqhk6ptd5j43f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
