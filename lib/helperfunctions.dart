@@ -30,7 +30,7 @@ Future<String> uploadDetails()  async {
     return e;
   }
 }
-Future<List<object>> getdetails (String startDate , String EndDate) async{
+Future<List<object>> getdetails() async{
   List<object> obj=[];
   try {
     var snap = await FirebaseFirestore.instance.collection("Details").doc(
