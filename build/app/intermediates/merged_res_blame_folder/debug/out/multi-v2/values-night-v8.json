@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ed007/Documents/GitHub/POS-nauseum/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/ed007/Documents/GitHub/POS-nauseum/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

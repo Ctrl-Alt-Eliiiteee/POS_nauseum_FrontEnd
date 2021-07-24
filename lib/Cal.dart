@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pos/Form.dart';
+import 'package:pos/Login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalendarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(title: 'Calendar Demo',
-      home: HomePage(),);
+    return const MaterialApp(
+      title: 'Calendar Demo',
+      home: HomePage(),
+    );
   }
 }
 
 /// The hove page which hosts the calendar
 class HomePage extends StatefulWidget {
+  final String username;
+
   /// Creates the home page to display teh calendar widget.
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key key, this.username}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -29,18 +35,21 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
           floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add , color: Colors.white,),
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
             backgroundColor: Colors.green,
-            onPressed: (){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => FormPage()));
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => FormPage()));
             },
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: h/5,
+                height: h / 5,
                 child: Card(
                   elevation: 1,
                   child: Padding(
@@ -51,39 +60,88 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('User' ,),
-                            SizedBox(
-                              height: h/150,
+                            Text(
+                              'User',
                             ),
-                            Text('GURURAJAN' , style: TextStyle(
-                              fontSize: h/40,
-                              color: HexColor('#c1e4ba'),
-                              fontWeight: FontWeight.w400,
-                            ),),
                             SizedBox(
-                              height: h/50,
+                              height: h / 150,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  widget.username.substring(
+                                      0, widget.username.indexOf('@')),
+                                  style: TextStyle(
+                                    fontSize: h / 40,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () async {
+                                    SharedPreferences prefs =
+                                        await SharedPreferences.getInstance();
+                                    prefs.setString('POS_email', '');
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => LoginPage()));
+                                  },
+                                  icon: Icon(
+                                    Icons.logout,
+                                    color: HexColor('#c1e4ba'),
+                                  ),
+                                  splashColor: HexColor('#c1e4ba'),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: h / 50,
                             ),
                             Text("Date"),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.only(left: 15 , right: 15),
+                                  padding: const EdgeInsets.only(
+                                      left: 15, right: 15),
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                                      border: Border.all(color: HexColor('#c1e4ba'))
-                                  ),
-                                  child: Text(DateTime.parse(finalDate).day.toString()+' / '+DateTime.parse(finalDate).month.toString()+' / '+DateTime.parse(finalDate).year.toString(),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      border: Border.all(
+                                          color: HexColor('#c1e4ba'))),
+                                  child: Text(
+                                    DateTime.parse(finalDate).day.toString() +
+                                        ' / ' +
+                                        DateTime.parse(finalDate)
+                                            .month
+                                            .toString() +
+                                        ' / ' +
+                                        DateTime.parse(finalDate)
+                                            .year
+                                            .toString(),
                                     style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: h/35
-                                    ),),
+                                        color: Colors.green, fontSize: h / 35),
+                                  ),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    IconButton(onPressed: (){}, icon: Icon(Icons.filter_list_alt, color: HexColor('#c1e4ba'),), splashColor: HexColor('#c1e4ba'),),
-                                    IconButton(onPressed: (){}, icon: Icon(Icons.view_list, color: HexColor('#c1e4ba'),)),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.filter_list_alt,
+                                        color: HexColor('#c1e4ba'),
+                                      ),
+                                      splashColor: HexColor('#c1e4ba'),
+                                    ),
+                                    IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.view_list,
+                                          color: HexColor('#c1e4ba'),
+                                        )),
                                   ],
                                 )
                               ],
@@ -96,11 +154,9 @@ class _HomePageState extends State<HomePage> {
                       decoration: BoxDecoration(
                           border: Border(
                               bottom: BorderSide(
-                                color: Colors.lightGreenAccent,
-                                width: 0.75,
-                              )
-                          )
-                      ),
+                        color: Colors.lightGreenAccent,
+                        width: 0.75,
+                      ))),
                     ),
                   ),
                 ),
@@ -111,7 +167,8 @@ class _HomePageState extends State<HomePage> {
                   dataSource: MeetingDataSource(_getDataSource()),
                   cellBorderColor: Colors.lightGreenAccent,
                   monthViewSettings: const MonthViewSettings(
-                      appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+                      appointmentDisplayMode:
+                          MonthAppointmentDisplayMode.appointment),
                 ),
               ),
             ],
@@ -123,13 +180,13 @@ class _HomePageState extends State<HomePage> {
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
     final DateTime startTime =
-    DateTime(today.year, today.month, today.day, 9, 0, 0);
+        DateTime(today.year, today.month, today.day, 9, 0, 0);
     final String subject = "There is a conf today";
     final DateTime endTime = startTime.add(const Duration(hours: 2));
     meetings.add(Meeting(
         'Conference', startTime, endTime, const Color(0xFF0F8644), false));
-    meetings.add(Meeting(
-        'Conference', startTime.add(const Duration(hours: 2)), endTime.add(const Duration(hours: 2)), const Color(0xFF0F8644), false));
+    meetings.add(Meeting('Conference', startTime.add(const Duration(hours: 2)),
+        endTime.add(const Duration(hours: 2)), const Color(0xFF0F8644), false));
     return meetings;
   }
 }
@@ -166,7 +223,7 @@ class MeetingDataSource extends CalendarDataSource {
 
   Meeting _getMeetingData(int index) {
     final dynamic meeting = appointments[index];
-     Meeting meetingData;
+    Meeting meetingData;
     if (meeting is Meeting) {
       meetingData = meeting;
     }
