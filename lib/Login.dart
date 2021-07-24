@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pos/Cal.dart';
 import 'package:pos/Form.dart';
 import 'package:pos/SignUp.dart';
 
@@ -90,9 +91,9 @@ class _LoginPageState extends State<LoginPage> {
                   ))),
               onPressed: () async {
                 try{
-                  final check = await FirebaseAuth.instance.signInWithEmailAndPassword(email: username, password: password);
+                 // final check = await FirebaseAuth.instance.signInWithEmailAndPassword(email: username, password: password);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FormPage()));
+                      MaterialPageRoute(builder: (context) => HomePage()));
                 }
                 catch(e){
                   showSnackBar(e);

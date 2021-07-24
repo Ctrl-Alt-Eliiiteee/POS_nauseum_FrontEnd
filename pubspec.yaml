@@ -32,6 +32,7 @@ dependencies:
   firebase_auth:
   cloud_firestore:
   firebase_core:
+  syncfusion_flutter_calendar:
 
 dev_dependencies:
   flutter_test:
