@@ -125,8 +125,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         final user = await FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
                                 email: username, password: password1);
-                        await showsnackbar('Registration successful');
-                        MaterialPageRoute(builder: (context) => LoginPage());
+                        showsnackbar('Registration successful');
+                        Navigator.pop(context,MaterialPageRoute(builder: (context) => LoginPage()));
                       } catch (e) {
                         showsnackbar(e);
                       }

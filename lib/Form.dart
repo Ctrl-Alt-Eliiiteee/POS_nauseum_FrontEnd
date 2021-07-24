@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pos/helperfunctions.dart';
-
+import 'main.dart';
 class FormPage extends StatefulWidget {
   @override
   _FormPageState createState() => _FormPageState();
 }
 
-String username1 = 'Soham';
+String username1 = email.substring(0,email.indexOf('@'));
 
 String startDate = '___________';
 String startTime = '___________';
