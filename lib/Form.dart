@@ -99,7 +99,7 @@ List<String> outcomeDropDown = [
   'Other'
 ];
 
-String restuledInFormalReferral = 'N/A';
+String resultedInFormalReferral = 'N/A';
 List<String> restuledInFormalReferralDropDown = [
   'Yes',
   'No',
@@ -254,14 +254,14 @@ class _FormPageState extends State<FormPage> {
                     if (_timeOfDay != null) {
                       setState(() {
                         sessionDuration = _timeOfDay.format(context);
-                        String ans="";
-                        for(int i=0;i<sessionDuration.length;i++){
-                          if(sessionDuration[i]==' '){
+                        String ans = "";
+                        for (int i = 0; i < sessionDuration.length; i++) {
+                          if (sessionDuration[i] == ' ') {
                             break;
                           }
-                          ans+=sessionDuration[i];
+                          ans += sessionDuration[i];
                         }
-                        sessionDuration=ans;
+                        sessionDuration = ans;
                       });
                     }
                   },
@@ -288,17 +288,15 @@ class _FormPageState extends State<FormPage> {
               SizedBox(height: h * 0.01),
               Padding(
                 padding: EdgeInsets.only(left: w * 0.035, right: 20),
-                child: Flexible(
-                  child: TextFormField(
-                    minLines: null,
-                    maxLines: null,
-                    onChanged: (value) {
-                      setState(() {
-                        doctorName = value;
-                      });
-                    },
-                    decoration: InputDecoration(hintText: 'Enter name(s)'),
-                  ),
+                child: TextFormField(
+                  minLines: null,
+                  maxLines: null,
+                  onChanged: (value) {
+                    setState(() {
+                      doctorName = value;
+                    });
+                  },
+                  decoration: InputDecoration(hintText: 'Enter name(s)'),
                 ),
               ),
               SizedBox(height: h * 0.02),
@@ -408,17 +406,15 @@ class _FormPageState extends State<FormPage> {
               SizedBox(height: h * 0.015),
               Padding(
                 padding: EdgeInsets.only(left: w * 0.035, right: 20),
-                child: Flexible(
-                  child: TextFormField(
-                    minLines: null,
-                    maxLines: null,
-                    onChanged: (value) {
-                      setState(() {
-                        comments = value;
-                      });
-                    },
-                    decoration: InputDecoration(hintText: 'Comments'),
-                  ),
+                child: TextFormField(
+                  minLines: null,
+                  maxLines: null,
+                  onChanged: (value) {
+                    setState(() {
+                      comments = value;
+                    });
+                  },
+                  decoration: InputDecoration(hintText: 'Comments'),
                 ),
               ),
               SizedBox(
@@ -439,6 +435,35 @@ class _FormPageState extends State<FormPage> {
                             TextStyle(color: Colors.white, fontSize: h * 0.03),
                       ))),
                   onPressed: () async {
+                    print(startDate +
+                        ' ' +
+                        startTime +
+                        ' ' +
+                        sessionDuration +
+                        ' ' +
+                        doctorName +
+                        ' ' +
+                        referralSource +
+                        ' ' +
+                        referralMode +
+                        ' ' +
+                        dob +
+                        ' ' +
+                        urn +
+                        ' ' +
+                        gender +
+                        ' ' +
+                        discipline +
+                        ' ' +
+                        clTeam +
+                        ' ' +
+                        posCode +
+                        ' ' +
+                        outcome +
+                        ' ' +
+                        resultedInFormalReferral +
+                        ' ' +
+                        comments);
                     String ans = await uploadDetails();
                     showSnackBar(ans);
                   },
@@ -493,7 +518,7 @@ class _FormPageState extends State<FormPage> {
                                   ? posCode
                                   : (index == 6)
                                       ? outcome
-                                      : restuledInFormalReferral,
+                                      : resultedInFormalReferral,
           onChanged: (value) {
             setState(() {
               if (index == 0) {
@@ -511,7 +536,7 @@ class _FormPageState extends State<FormPage> {
               } else if (index == 6) {
                 outcome = value;
               } else if (index == 7) {
-                restuledInFormalReferral = value;
+                resultedInFormalReferral = value;
               }
             });
           },
