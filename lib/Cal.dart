@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                                     MonthAppointmentDisplayMode.appointment),
                             onLongPress: (value) {
                               print(value.date);
-                              //showMeetings(value.date);
+                              showMeetings(value.date);
                               showModalBottomSheet(
                                   context: context,
                                   builder: (context) =>
@@ -207,36 +207,6 @@ class _HomePageState extends State<HomePage> {
   Future<String> _loadDetails() async {
     _loadDetailsFromFirebase = await getdetails();
     return _loadDetailsFromFirebase[0].startDate;
-  }
-
-  List<Meeting> _getDataSource() {
-    meetings = <Meeting>[];
-    for (int c = 0; c < _loadDetailsFromFirebase.length; c++) {
-      final DateTime startTime =
-          DateFormat('d/M/yyyy').parse(_loadDetailsFromFirebase[c].startDate);
-      final DateTime endTime = startTime.add(const Duration(hours: 2));
-      meetings.add(Meeting(
-          _loadDetailsFromFirebase[c].doctorNames,
-          startTime,
-          endTime,
-          const Color(0xFF0F8644),
-          true,
-          _loadDetailsFromFirebase[c].startDate,
-          _loadDetailsFromFirebase[c].startTime,
-          _loadDetailsFromFirebase[c].sessionDuration,
-          _loadDetailsFromFirebase[c].referralSource,
-          _loadDetailsFromFirebase[c].referralMode,
-          _loadDetailsFromFirebase[c].dob,
-          _loadDetailsFromFirebase[c].urn,
-          _loadDetailsFromFirebase[c].gender,
-          _loadDetailsFromFirebase[c].discipline,
-          _loadDetailsFromFirebase[c].clTeam,
-          _loadDetailsFromFirebase[c].posCode,
-          _loadDetailsFromFirebase[c].outcome,
-          _loadDetailsFromFirebase[c].restuledInFormalReferral,
-          _loadDetailsFromFirebase[c].comments));
-    }
-    return meetings;
   }
 
   Widget showMeetings(DateTime selectedDate) {
@@ -357,6 +327,59 @@ class _HomePageState extends State<HomePage> {
           )
       ],
     ));
+  }
+}
+
+List<Meeting> _getDataSource() {
+  meetings = <Meeting>[];
+  for (int c = 0; c < _loadDetailsFromFirebase.length; c++) {
+    final DateTime startTime =
+        DateFormat('d/M/yyyy').parse(_loadDetailsFromFirebase[c].startDate);
+    final DateTime endTime = startTime.add(const Duration(hours: 2));
+    meetings.add(Meeting(
+        _loadDetailsFromFirebase[c].doctorNames,
+        startTime,
+        endTime,
+        const Color(0xFF0F8644),
+        true,
+        _loadDetailsFromFirebase[c].startDate,
+        _loadDetailsFromFirebase[c].startTime,
+        _loadDetailsFromFirebase[c].sessionDuration,
+        _loadDetailsFromFirebase[c].referralSource,
+        _loadDetailsFromFirebase[c].referralMode,
+        _loadDetailsFromFirebase[c].dob,
+        _loadDetailsFromFirebase[c].urn,
+        _loadDetailsFromFirebase[c].gender,
+        _loadDetailsFromFirebase[c].discipline,
+        _loadDetailsFromFirebase[c].clTeam,
+        _loadDetailsFromFirebase[c].posCode,
+        _loadDetailsFromFirebase[c].outcome,
+        _loadDetailsFromFirebase[c].restuledInFormalReferral,
+        _loadDetailsFromFirebase[c].comments));
+  }
+  return meetings;
+}
+
+class CalendarDayView extends StatefulWidget {
+  final DateTime dateTime;
+
+  const CalendarDayView({Key key, this.dateTime}) : super(key: key);
+  @override
+  _CalendarDayViewState createState() => _CalendarDayViewState();
+}
+
+class _CalendarDayViewState extends State<CalendarDayView> {
+  @override
+  Widget build(BuildContext context) {
+    return SfCalendar(
+      view: CalendarView.day,
+      initialDisplayDate: widget.dateTime,
+      dataSource: MeetingDataSource(_getDataSource()),
+      cellBorderColor: Colors.lightGreenAccent,
+      monthViewSettings: const MonthViewSettings(
+          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+      onLongPress: (value) {},
+    );
   }
 }
 
