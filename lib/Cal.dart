@@ -11,7 +11,8 @@ import 'package:intl/intl.dart';
 class CalendarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Calendar Demo',
       home: HomePage(),
     );
@@ -123,20 +124,20 @@ class _HomePageState extends State<HomePage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.filter_list_alt,
-                                        color: HexColor('#c1e4ba'),
-                                      ),
-                                      splashColor: HexColor('#c1e4ba'),
-                                    ),
-                                    IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.view_list,
-                                          color: HexColor('#c1e4ba'),
-                                        )),
+                                    // IconButton(
+                                    //   onPressed: () {},
+                                    //   icon: Icon(
+                                    //     // Icons.filter_list_alt,
+                                    //     color: HexColor('#c1e4ba'),
+                                    //   ),
+                                    //   splashColor: HexColor('#c1e4ba'),
+                                    // ),
+                                    // IconButton(
+                                    //     onPressed: () {},
+                                    //     icon: Icon(
+                                    //       Icons.view_list,
+                                    //       color: HexColor('#c1e4ba'),
+                                    //     )),
                                   ],
                                 )
                               ],

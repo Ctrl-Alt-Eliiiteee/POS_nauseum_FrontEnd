@@ -140,50 +140,57 @@ class _DetailsState extends State<Details> {
         height: h,
         width: w,
         child: SingleChildScrollView(
-          child: AbsorbPointer(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      border: Border.all(
-                        color: HexColor('#82cb70'),
-                      )),
-                  child: Column(
-                    children: [
-                      SizedBox(height: h * 0.05),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(left: w * 0.035, right: w * 0.035),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                                text: TextSpan(children: [
-                              const TextSpan(
-                                  text: 'User\n',
-                                  style: TextStyle(color: Colors.black)),
-                              TextSpan(
-                                  text: widget.username,
-                                  style: TextStyle(
-                                      color: HexColor('#82cb70'),
-                                      fontSize: w * 0.05))
-                            ])),
-                            IconButton(
-                                icon: Icon(
-                                  Icons.more_vert,
-                                  size: w * 0.08,
-                                ),
-                                onPressed: () {})
-                          ],
-                        ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    border: Border.all(
+                      color: HexColor('#82cb70'),
+                    )),
+                child: Column(
+                  children: [
+                    SizedBox(height: h * 0.05),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(left: w * 0.035, right: w * 0.035),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RichText(
+                              text: TextSpan(children: [
+                            const TextSpan(
+                                text: 'User\n',
+                                style: TextStyle(color: Colors.black)),
+                            TextSpan(
+                                text: widget.username,
+                                style: TextStyle(
+                                    color: HexColor('#82cb70'),
+                                    fontSize: w * 0.05))
+                          ])),
+                          IconButton(
+                              icon: Icon(
+                                Icons.cancel_rounded,
+                                size: w * 0.08,
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              })
+                        ],
                       ),
-                      SizedBox(height: h * 0.02),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: h * 0.02),
+                  ],
                 ),
-                SizedBox(height: h * 0.02),
+              ),
+              SizedBox(height: h * 0.02),
+              AbsorbPointer(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+
+
                 Padding(
                   padding: EdgeInsets.only(left: w * 0.035),
                   child: Text(
@@ -385,8 +392,10 @@ class _DetailsState extends State<Details> {
                   height: h * 0.02,
                 ),
                 const SizedBox(height: 100)
-              ],
-            ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -16,6 +16,7 @@ Future main() async {
     }
   } catch (e) {}
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: (email.contains('@') && email.contains('.com'))
         ? HomePage(username: email)
         : LoginPage(),

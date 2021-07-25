@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                                     )));
                       });
                     } catch (e) {
-                      showSnackBar(e);
+                      showSnackBar("Invalid email or password");
                     }
                   },
                 ),
