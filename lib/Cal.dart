@@ -206,6 +206,9 @@ class _HomePageState extends State<HomePage> {
 
   Future<String> _loadDetails() async {
     _loadDetailsFromFirebase = await getdetails();
+    if (_loadDetailsFromFirebase.length == 0) {
+      return "DONE";
+    }
     return _loadDetailsFromFirebase[0].startDate;
   }
 
