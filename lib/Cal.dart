@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pos/Form.dart';
 import 'package:pos/Login.dart';
+import 'package:pos/detailspage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'helperfunctions.dart';
+import 'package:intl/intl.dart';
 
 class CalendarApp extends StatelessWidget {
   @override
@@ -15,6 +17,9 @@ class CalendarApp extends StatelessWidget {
     );
   }
 }
+
+var _loadDetailsFromFirebase;
+List<Meeting> meetings = <Meeting>[];
 
 /// The hove page which hosts the calendar
 class HomePage extends StatefulWidget {
@@ -28,7 +33,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void initState() {
+    super.initState();
+  }
+
   String finalDate = DateTime.now().toString();
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -41,22 +51,26 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),
             backgroundColor: Colors.green,
-            onPressed: () async {
-              var eeshan = await getdetails();
+            onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => FormPage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FormPage(
+                            username: widget.username
+                                .substring(0, widget.username.indexOf('@')),
+                          )));
             },
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          body: Stack(
             children: [
-              Container(
-                height: h / 5,
-                child: Card(
-                  elevation: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Container(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    //height: h / 5,
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Card(
+                      elevation: 1,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Column(
@@ -68,35 +82,14 @@ class _HomePageState extends State<HomePage> {
                             SizedBox(
                               height: h / 150,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  widget.username.substring(
-                                      0, widget.username.indexOf('@')),
-                                  style: TextStyle(
-                                    fontSize: h / 40,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () async {
-                                    SharedPreferences prefs =
-                                        await SharedPreferences.getInstance();
-                                    prefs.setString('POS_email', '');
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
-                                  },
-                                  icon: Icon(
-                                    Icons.logout,
-                                    color: HexColor('#c1e4ba'),
-                                  ),
-                                  splashColor: HexColor('#c1e4ba'),
-                                ),
-                              ],
+                            Text(
+                              widget.username
+                                  .substring(0, widget.username.indexOf('@')),
+                              style: TextStyle(
+                                fontSize: h / 40,
+                                color: Colors.green,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                             SizedBox(
                               height: h / 50,
@@ -151,26 +144,59 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                      height: 100,
-                      width: w,
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                        color: Colors.lightGreenAccent,
-                        width: 0.75,
-                      ))),
                     ),
                   ),
-                ),
+                  FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                            child: CircularProgressIndicator(
+                          valueColor:
+                              new AlwaysStoppedAnimation<Color>(Colors.green),
+                        ));
+                      } else {
+                        return Expanded(
+                          child: SfCalendar(
+                            view: CalendarView.month,
+                            dataSource: MeetingDataSource(_getDataSource()),
+                            cellBorderColor: Colors.lightGreenAccent,
+                            monthViewSettings: const MonthViewSettings(
+                                appointmentDisplayMode:
+                                    MonthAppointmentDisplayMode.appointment),
+                            onLongPress: (value) {
+                              print(value.date);
+                              //showMeetings(value.date);
+                              showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) =>
+                                      showMeetings(value.date));
+                            },
+                          ),
+                        );
+                      }
+                    },
+                    future: _loadDetails(),
+                  ),
+                ],
               ),
-              Expanded(
-                child: SfCalendar(
-                  view: CalendarView.month,
-                  dataSource: MeetingDataSource(_getDataSource()),
-                  cellBorderColor: Colors.lightGreenAccent,
-                  monthViewSettings: const MonthViewSettings(
-                      appointmentDisplayMode:
-                          MonthAppointmentDisplayMode.appointment),
+              Padding(
+                padding: const EdgeInsets.all(5),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: () async {
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setString('POS_email', '');
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    },
+                    icon: Icon(
+                      Icons.logout,
+                      color: HexColor('#c1e4ba'),
+                    ),
+                    splashColor: HexColor('#c1e4ba'),
+                  ),
                 ),
               ),
             ],
@@ -178,18 +204,159 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Future<String> _loadDetails() async {
+    _loadDetailsFromFirebase = await getdetails();
+    return _loadDetailsFromFirebase[0].startDate;
+  }
+
   List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime =
-        DateTime(today.year, today.month, today.day, 9, 0, 0);
-    final String subject = "There is a conf today";
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFF0F8644), false));
-    meetings.add(Meeting('Conference', startTime.add(const Duration(hours: 2)),
-        endTime.add(const Duration(hours: 2)), const Color(0xFF0F8644), false));
+    meetings = <Meeting>[];
+    for (int c = 0; c < _loadDetailsFromFirebase.length; c++) {
+      final DateTime startTime =
+          DateFormat('d/M/yyyy').parse(_loadDetailsFromFirebase[c].startDate);
+      final DateTime endTime = startTime.add(const Duration(hours: 2));
+      meetings.add(Meeting(
+          _loadDetailsFromFirebase[c].doctorNames,
+          startTime,
+          endTime,
+          const Color(0xFF0F8644),
+          true,
+          _loadDetailsFromFirebase[c].startDate,
+          _loadDetailsFromFirebase[c].startTime,
+          _loadDetailsFromFirebase[c].sessionDuration,
+          _loadDetailsFromFirebase[c].referralSource,
+          _loadDetailsFromFirebase[c].referralMode,
+          _loadDetailsFromFirebase[c].dob,
+          _loadDetailsFromFirebase[c].urn,
+          _loadDetailsFromFirebase[c].gender,
+          _loadDetailsFromFirebase[c].discipline,
+          _loadDetailsFromFirebase[c].clTeam,
+          _loadDetailsFromFirebase[c].posCode,
+          _loadDetailsFromFirebase[c].outcome,
+          _loadDetailsFromFirebase[c].restuledInFormalReferral,
+          _loadDetailsFromFirebase[c].comments));
+    }
     return meetings;
+  }
+
+  Widget showMeetings(DateTime selectedDate) {
+    List<Meeting> meetingsFromSelectedDate = <Meeting>[];
+    for (int c = 0; c < meetings.length; c++) {
+      if (meetings[c].from == selectedDate) {
+        meetingsFromSelectedDate.add(meetings[c]);
+      }
+    }
+    double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
+
+    if (meetingsFromSelectedDate.length == 0) {
+      return Container(
+        width: w,
+        height: h / 2,
+        child: Center(
+          child: Text(
+              "No meetings schduled for " +
+                  selectedDate.day.toString() +
+                  '/' +
+                  selectedDate.month.toString() +
+                  '/' +
+                  selectedDate.year.toString(),
+              style: TextStyle(color: Colors.black, fontSize: w * 0.05)),
+        ),
+      );
+    }
+
+    return Container(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 10, top: 20),
+          child: Text(
+              "Meetings schduled for " +
+                  selectedDate.day.toString() +
+                  '/' +
+                  selectedDate.month.toString() +
+                  '/' +
+                  selectedDate.year.toString(),
+              style: TextStyle(color: Colors.black, fontSize: w * 0.05)),
+        ),
+        for (int c = 0; c < meetingsFromSelectedDate.length; c++)
+          Center(
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                TextButton(
+                  style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      padding: EdgeInsets.all(0)),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Details(
+                                  username: widget.username.substring(
+                                      0, widget.username.indexOf('@')),
+                                  startDate:
+                                      meetingsFromSelectedDate[c].startDate,
+                                  startTime:
+                                      meetingsFromSelectedDate[c].startTime,
+                                  sessionDuration: meetingsFromSelectedDate[c]
+                                      .sessionDuration,
+                                  doctorName:
+                                      meetingsFromSelectedDate[c].eventName,
+                                  referralSource: meetingsFromSelectedDate[c]
+                                      .referralSource,
+                                  referralMode:
+                                      meetingsFromSelectedDate[c].referralMode,
+                                  dob: meetingsFromSelectedDate[c].dob,
+                                  urn: meetingsFromSelectedDate[c].urn,
+                                  gender: meetingsFromSelectedDate[c].gender,
+                                  discipline:
+                                      meetingsFromSelectedDate[c].discipline,
+                                  clTeam: meetingsFromSelectedDate[c].clTeam,
+                                  posCode: meetingsFromSelectedDate[c].posCode,
+                                  outcome: meetingsFromSelectedDate[c].outcome,
+                                  resultedInFormalReferral:
+                                      meetingsFromSelectedDate[c]
+                                          .restuledInFormalReferral,
+                                  comments:
+                                      meetingsFromSelectedDate[c].comments,
+                                )));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    width: w - 20,
+                    decoration: BoxDecoration(
+                        color: HexColor('#c1e4ba'),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    child: Column(
+                      children: [
+                        Text(
+                          meetingsFromSelectedDate[c].eventName,
+                          style: TextStyle(
+                              color: Colors.black, fontSize: w * 0.05),
+                        ),
+                        Text(
+                          meetingsFromSelectedDate[c].startTime,
+                          style: TextStyle(
+                              color: Colors.black, fontSize: w * 0.04),
+                        ),
+                        Text(
+                          "Click here for more Details",
+                          style: TextStyle(
+                              color: Colors.black, fontSize: w * 0.035),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+      ],
+    ));
   }
 }
 
@@ -236,7 +403,26 @@ class MeetingDataSource extends CalendarDataSource {
 
 class Meeting {
   /// Creates a meeting class with required details.
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  Meeting(
+      this.eventName,
+      this.from,
+      this.to,
+      this.background,
+      this.isAllDay,
+      this.startDate,
+      this.startTime,
+      this.sessionDuration,
+      this.referralSource,
+      this.referralMode,
+      this.dob,
+      this.urn,
+      this.gender,
+      this.discipline,
+      this.clTeam,
+      this.posCode,
+      this.outcome,
+      this.restuledInFormalReferral,
+      this.comments);
 
   /// Event name which is equivalent to subject property of [Appointment].
   String eventName;
@@ -252,4 +438,45 @@ class Meeting {
 
   /// IsAllDay which is equivalent to isAllDay property of [Appointment].
   bool isAllDay;
+
+  String startDate;
+  String startTime;
+  String sessionDuration;
+  String doctorNames;
+  String referralSource;
+  String referralMode;
+  String dob;
+  String urn;
+  String gender;
+  String discipline;
+  String clTeam;
+  String posCode;
+  String outcome;
+  String restuledInFormalReferral;
+  String comments;
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {},
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("My title"),
+    content: Text("This is my message."),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

@@ -1,10 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ed007/Documents/GitHub/POS-nauseum/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
+            "outputFile": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-es/values-es.xml",
             "map": [
                 {
-                    "source": "/Users/ed007/.gradle/caches/transforms-2/files-2.1/93fbae78ce8dc134e45274d9cd223907/jetified-play-services-base-17.1.0/res/values-es/values.xml",
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/values-es/values-es.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "2931",
+                        "endColumns": "100",
+                        "endOffsets": "3027"
+                    }
+                },
+                {
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/93fbae78ce8dc134e45274d9cd223907/jetified-play-services-base-17.1.0/res/values-es/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -21,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/ed007/.gradle/caches/transforms-2/files-2.1/44839bb2c2273d4740a7525da7c26a24/jetified-play-services-basement-17.1.0/res/values-es/values.xml",
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/44839bb2c2273d4740a7525da7c26a24/jetified-play-services-basement-17.1.0/res/values-es/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -35,23 +52,6 @@
                         "startOffsets": "1299",
                         "endColumns": "218",
                         "endOffsets": "1513"
-                    }
-                },
-                {
-                    "source": "/Users/ed007/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/values-es/values-es.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "20",
-                        "startColumns": "4",
-                        "startOffsets": "2931",
-                        "endColumns": "100",
-                        "endOffsets": "3027"
                     }
                 }
             ]

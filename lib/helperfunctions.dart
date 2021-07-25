@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pos/Form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 Future<String> uploadDetails() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String username = prefs.getString('POS_email');
@@ -78,10 +77,12 @@ Future<List<object>> getdetails() async {
             clTeam: clteam,
             posCode: posCode,
             outcome: outcome,
+            restuledInFormalReferral: restuledInFormalReferral,
             comments: comments);
         obj.add(objl);
       });
     });
+    return obj;
   } catch (e) {
     print(e);
   }

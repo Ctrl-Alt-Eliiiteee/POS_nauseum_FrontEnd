@@ -100,29 +100,35 @@ class Details extends StatefulWidget {
   final String comments;
 
   const Details(
-      {Key? key,
-      required this.username,
-      required this.startDate,
-      required this.startTime,
-      required this.sessionDuration,
-      required this.doctorName,
-      required this.referralSource,
-      required this.referralMode,
-      required this.dob,
-      required this.urn,
-      required this.gender,
-      required this.discipline,
-      required this.clTeam,
-      required this.posCode,
-      required this.outcome,
-      required this.resultedInFormalReferral,
-      required this.comments})
+      {Key key,
+      this.username,
+      this.startDate,
+      this.startTime,
+      this.sessionDuration,
+      this.doctorName,
+      this.referralSource,
+      this.referralMode,
+      this.dob,
+      this.urn,
+      this.gender,
+      this.discipline,
+      this.clTeam,
+      this.posCode,
+      this.outcome,
+      this.resultedInFormalReferral,
+      this.comments})
       : super(key: key);
   @override
   _DetailsState createState() => _DetailsState();
 }
 
 class _DetailsState extends State<Details> {
+  void iniState() {
+    super.initState();
+    print(widget.comments);
+    print(widget.resultedInFormalReferral);
+  }
+
   @override
   Widget build(BuildContext context) {
     var _doctorNameController = TextEditingController();
@@ -304,7 +310,7 @@ class _DetailsState extends State<Details> {
                           fontWeight: FontWeight.w400),
                     ),
                     onPressed: () async {
-                      DateTime? _dateTime = await showDatePicker(
+                      DateTime _dateTime = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime(1900),
@@ -371,8 +377,7 @@ class _DetailsState extends State<Details> {
                   child: TextFormField(
                     minLines: null,
                     maxLines: null,
-                    onChanged: (value) {},
-                    initialValue: widget.comments,
+                    initialValue: widget.comments.toString(),
                     decoration: const InputDecoration(hintText: 'Comments'),
                   ),
                 ),

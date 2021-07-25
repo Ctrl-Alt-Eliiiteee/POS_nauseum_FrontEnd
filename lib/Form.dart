@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pos/Cal.dart';
 import 'package:pos/helperfunctions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
-class FormPage extends StatefulWidget {
-  @override
-  _FormPageState createState() => _FormPageState();
-}
-
-String username1 = email.substring(0,email.indexOf('@'));
 
 String startDate = '___________';
 String startTime = '___________';
@@ -108,7 +104,35 @@ List<String> restuledInFormalReferralDropDown = [
 
 String comments;
 
+class FormPage extends StatefulWidget {
+  final String username;
+
+  const FormPage({Key key, this.username}) : super(key: key);
+  @override
+  _FormPageState createState() => _FormPageState();
+}
+
 class _FormPageState extends State<FormPage> {
+  void initState() {
+    super.initState();
+    print(widget.username);
+    startDate = '___________';
+    startTime = '___________';
+    sessionDuration = '___________';
+    doctorName = 'Soham';
+    referralSource = 'Community GP';
+    referralMode = 'In Person / Corridor';
+    urn = '';
+    dob = '___________';
+    gender = 'Male';
+    discipline = 'Consultant';
+    clTeam = 'Team 1';
+    posCode = '10.01.00 Traige';
+    outcome = 'Other';
+    resultedInFormalReferral = 'N/A';
+    comments = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     var _doctorNameController = TextEditingController();
@@ -125,7 +149,9 @@ class _FormPageState extends State<FormPage> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20)),
                     border: Border.all(
                       color: HexColor('#82cb70'),
                     )),
@@ -144,7 +170,7 @@ class _FormPageState extends State<FormPage> {
                                 text: 'User\n',
                                 style: TextStyle(color: Colors.black)),
                             TextSpan(
-                                text: username1,
+                                text: widget.username,
                                 style: TextStyle(
                                     color: HexColor('#82cb70'),
                                     fontSize: w * 0.05))
@@ -422,6 +448,9 @@ class _FormPageState extends State<FormPage> {
               ),
               Center(
                 child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.all(0),
+                  ),
                   child: Container(
                       height: h * 0.05,
                       width: w * 0.9,
@@ -466,6 +495,16 @@ class _FormPageState extends State<FormPage> {
                         comments);
                     String ans = await uploadDetails();
                     showSnackBar(ans);
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    String username = prefs.getString('POS_email');
+                    print(username);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage(
+                                  username: username,
+                                )));
                   },
                 ),
               ),
