@@ -4,6 +4,7 @@ import 'package:pos/Form.dart';
 import 'package:pos/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'helperfunctions.dart';
 
 class CalendarApp extends StatelessWidget {
   @override
@@ -40,7 +41,8 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),
             backgroundColor: Colors.green,
-            onPressed: () {
+            onPressed: () async {
+              var eeshan = await getdetails();
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => FormPage()));
             },

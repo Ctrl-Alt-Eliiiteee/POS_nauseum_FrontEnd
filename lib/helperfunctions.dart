@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pos/Form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'Login.dart';
 
 Future<String> uploadDetails() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -38,6 +37,8 @@ Future<String> uploadDetails() async {
 }
 
 Future<List<object>> getdetails() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String username = prefs.getString('POS_email');
   List<object> obj = [];
   try {
     var snap = await FirebaseFirestore.instance
