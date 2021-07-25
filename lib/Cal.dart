@@ -237,95 +237,101 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Container(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.only(left: 10, top: 20),
-          child: Text(
-              "Meetings schduled for " +
-                  selectedDate.day.toString() +
-                  '/' +
-                  selectedDate.month.toString() +
-                  '/' +
-                  selectedDate.year.toString(),
-              style: TextStyle(color: Colors.black, fontSize: w * 0.05)),
-        ),
-        for (int c = 0; c < meetingsFromSelectedDate.length; c++)
-          Center(
-            child: Column(
-              children: [
-                SizedBox(height: 10),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
+        child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(left: 10, top: 20),
+            child: Text(
+                "Meetings schduled for " +
+                    selectedDate.day.toString() +
+                    '/' +
+                    selectedDate.month.toString() +
+                    '/' +
+                    selectedDate.year.toString(),
+                style: TextStyle(color: Colors.black, fontSize: w * 0.05)),
+          ),
+          for (int c = 0; c < meetingsFromSelectedDate.length; c++)
+            Center(
+              child: Column(
+                children: [
+                  SizedBox(height: 10),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        padding: EdgeInsets.all(0)),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Details(
+                                    username: widget.username.substring(
+                                        0, widget.username.indexOf('@')),
+                                    startDate:
+                                        meetingsFromSelectedDate[c].startDate,
+                                    startTime:
+                                        meetingsFromSelectedDate[c].startTime,
+                                    sessionDuration: meetingsFromSelectedDate[c]
+                                        .sessionDuration,
+                                    doctorName:
+                                        meetingsFromSelectedDate[c].eventName,
+                                    referralSource: meetingsFromSelectedDate[c]
+                                        .referralSource,
+                                    referralMode: meetingsFromSelectedDate[c]
+                                        .referralMode,
+                                    dob: meetingsFromSelectedDate[c].dob,
+                                    urn: meetingsFromSelectedDate[c].urn,
+                                    gender: meetingsFromSelectedDate[c].gender,
+                                    discipline:
+                                        meetingsFromSelectedDate[c].discipline,
+                                    clTeam: meetingsFromSelectedDate[c].clTeam,
+                                    posCode:
+                                        meetingsFromSelectedDate[c].posCode,
+                                    outcome:
+                                        meetingsFromSelectedDate[c].outcome,
+                                    resultedInFormalReferral:
+                                        meetingsFromSelectedDate[c]
+                                            .restuledInFormalReferral,
+                                    comments:
+                                        meetingsFromSelectedDate[c].comments,
+                                  )));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      width: w - 20,
+                      decoration: BoxDecoration(
+                          color: HexColor('#c1e4ba'),
                           borderRadius: BorderRadius.all(Radius.circular(15))),
-                      padding: EdgeInsets.all(0)),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Details(
-                                  username: widget.username.substring(
-                                      0, widget.username.indexOf('@')),
-                                  startDate:
-                                      meetingsFromSelectedDate[c].startDate,
-                                  startTime:
-                                      meetingsFromSelectedDate[c].startTime,
-                                  sessionDuration: meetingsFromSelectedDate[c]
-                                      .sessionDuration,
-                                  doctorName:
-                                      meetingsFromSelectedDate[c].eventName,
-                                  referralSource: meetingsFromSelectedDate[c]
-                                      .referralSource,
-                                  referralMode:
-                                      meetingsFromSelectedDate[c].referralMode,
-                                  dob: meetingsFromSelectedDate[c].dob,
-                                  urn: meetingsFromSelectedDate[c].urn,
-                                  gender: meetingsFromSelectedDate[c].gender,
-                                  discipline:
-                                      meetingsFromSelectedDate[c].discipline,
-                                  clTeam: meetingsFromSelectedDate[c].clTeam,
-                                  posCode: meetingsFromSelectedDate[c].posCode,
-                                  outcome: meetingsFromSelectedDate[c].outcome,
-                                  resultedInFormalReferral:
-                                      meetingsFromSelectedDate[c]
-                                          .restuledInFormalReferral,
-                                  comments:
-                                      meetingsFromSelectedDate[c].comments,
-                                )));
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    width: w - 20,
-                    decoration: BoxDecoration(
-                        color: HexColor('#c1e4ba'),
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                    child: Column(
-                      children: [
-                        Text(
-                          meetingsFromSelectedDate[c].eventName,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: w * 0.05),
-                        ),
-                        Text(
-                          meetingsFromSelectedDate[c].startTime,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: w * 0.04),
-                        ),
-                        Text(
-                          "Click here for more Details",
-                          style: TextStyle(
-                              color: Colors.black, fontSize: w * 0.035),
-                        ),
-                      ],
+                      child: Column(
+                        children: [
+                          Text(
+                            meetingsFromSelectedDate[c].eventName,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: w * 0.05),
+                          ),
+                          Text(
+                            meetingsFromSelectedDate[c].startTime,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: w * 0.04),
+                          ),
+                          Text(
+                            "Click here for more Details",
+                            style: TextStyle(
+                                color: Colors.black, fontSize: w * 0.035),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
-          )
-      ],
+          SizedBox(height: 30),
+        ],
+      ),
     ));
   }
 }
