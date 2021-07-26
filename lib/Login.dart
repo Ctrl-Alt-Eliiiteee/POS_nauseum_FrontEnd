@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Text("POS Nauseum",
+                  child: Text("POS eMetrics",
                       style: TextStyle(
                           fontSize: w * 0.12,
                           color: Colors.white,
