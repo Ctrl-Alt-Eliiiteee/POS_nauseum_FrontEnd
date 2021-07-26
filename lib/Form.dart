@@ -299,7 +299,7 @@ class _FormPageState extends State<FormPage> {
               Padding(
                 padding: EdgeInsets.only(left: w * 0.035),
                 child: Text(
-                  'Doctors',
+                  'Clinician',
                   style: TextStyle(color: Colors.black, fontSize: w * 0.06),
                 ),
               ),
