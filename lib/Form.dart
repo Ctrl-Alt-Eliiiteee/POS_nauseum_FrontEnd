@@ -22,7 +22,7 @@ String urn;
 String dob = '___________';
 String gender = 'Male';
 String clTeam = 'Team 1';
-List<String> posCode = [];
+List<List<String>> posCode = [];
 String outcome = 'Other';
 String resultedInFormalReferral = 'N/A';
 String comments;
@@ -128,7 +128,7 @@ class _FormPageState extends State<FormPage> {
     dob = '___________';
     gender = 'Male';
     clTeam = 'Team 1';
-    posCode.add('10.01.00 Traige');
+    posCode.add(['10.01.00 Traige', '0']);
     outcome = 'Other';
     resultedInFormalReferral = 'N/A';
     comments = '';
@@ -473,7 +473,7 @@ class _FormPageState extends State<FormPage> {
                     onPressed: () {
                       setState(() {
                         noOfPosDropDowns += 1;
-                        posCode.add('10.01.00 Traige');
+                        posCode.add(['10.01.00 Traige', '']);
                       });
                     },
                   ),
@@ -600,7 +600,7 @@ class _FormPageState extends State<FormPage> {
                     //     resultedInFormalReferral +
                     //     ' ' +
                     //     comments);
-                    print(doctorName);
+                    print(posCode);
                     // String ans = await uploadDetails();
                     // showSnackBar(ans);
                     // SharedPreferences prefs =
@@ -707,7 +707,7 @@ class _FormPageState extends State<FormPage> {
         Padding(
           padding: EdgeInsets.only(left: w * 0.035),
           child: Text(
-            (index + 1).toString() + ". Doctor name",
+            (index + 1).toString() + ". Clinician name",
             style: TextStyle(color: Colors.black, fontSize: w * 0.04),
           ),
         ),
@@ -719,7 +719,7 @@ class _FormPageState extends State<FormPage> {
                 doctorName[index][0] = value;
               });
             },
-            decoration: InputDecoration(hintText: 'Doctor name'),
+            decoration: InputDecoration(hintText: 'Clinician name'),
           ),
         ),
         SizedBox(height: h * 0.015),
@@ -778,35 +778,54 @@ class _FormPageState extends State<FormPage> {
           ),
         ),
         SizedBox(height: h * 0.01),
-        Padding(
-          padding: EdgeInsets.only(left: w * 0.06, right: 30),
-          child: Container(
-            padding: EdgeInsets.only(left: w * 0.035, right: w * 0.035),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                border: Border.all(color: Colors.grey[300])),
-            child: DropdownButton(
-              underline: SizedBox(),
-              icon: Icon(
-                Icons.arrow_drop_down_sharp,
-                color: HexColor('#82cb70'),
+        Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: w * 0.06, right: 30),
+              child: Container(
+                padding: EdgeInsets.only(left: w * 0.035, right: w * 0.035),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(color: Colors.grey[300])),
+                child: DropdownButton(
+                  underline: SizedBox(),
+                  icon: Icon(
+                    Icons.arrow_drop_down_sharp,
+                    color: HexColor('#82cb70'),
+                  ),
+                  iconSize: w * 0.07,
+                  isExpanded: true,
+                  value: posCode[index][0],
+                  onChanged: (value) {
+                    setState(() {
+                      posCode[index][0] = value;
+                    });
+                  },
+                  items: posCodeDropDown.map((valueItem) {
+                    return DropdownMenuItem(
+                      value: valueItem,
+                      child: Text(valueItem),
+                    );
+                  }).toList(),
+                ),
               ),
-              isExpanded: true,
-              iconSize: w * 0.07,
-              value: posCode[index],
-              onChanged: (value) {
-                setState(() {
-                  posCode[index] = value;
-                });
-              },
-              items: posCodeDropDown.map((valueItem) {
-                return DropdownMenuItem(
-                  value: valueItem,
-                  child: Text(valueItem),
-                );
-              }).toList(),
             ),
-          ),
+            SizedBox(
+              height: h * 0.01,
+            ),
+            Container(
+              padding: EdgeInsets.only(right: w / 2, left: w * 0.06),
+              child: TextFormField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  setState(() {
+                    posCode[index][1] = value;
+                  });
+                },
+                decoration: InputDecoration(hintText: 'Time (in minutes)'),
+              ),
+            )
+          ],
         ),
         SizedBox(height: h * 0.015),
       ],
