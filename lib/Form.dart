@@ -600,6 +600,9 @@ class _FormPageState extends State<FormPage> {
                     //     resultedInFormalReferral +
                     //     ' ' +
                     //     comments);
+                    print("Clinician name");
+                    print(doctorName);
+                    print("Intervention Code");
                     print(posCode);
                     // String ans = await uploadDetails();
                     // showSnackBar(ans);
