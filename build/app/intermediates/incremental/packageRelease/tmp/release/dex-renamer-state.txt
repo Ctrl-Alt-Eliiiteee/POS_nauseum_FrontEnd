@@ -1,0 +1,4 @@
+#Sun Jul 25 23:07:23 IST 2021
+base.0=/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

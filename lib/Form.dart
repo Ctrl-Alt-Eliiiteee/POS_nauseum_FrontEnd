@@ -10,9 +10,23 @@ String startDate = '___________';
 String startTime = '___________';
 String sessionDuration = '___________';
 
-String doctorName = 'Soham';
+List<List<String>> doctorName = [];
+
+int noOfDoctorTextFields = 1;
+
+int noOfPosDropDowns = 1;
 
 String referralSource = 'Community GP';
+String referralMode = 'In Person / Corridor';
+String urn;
+String dob = '___________';
+String gender = 'Male';
+String clTeam = 'Team 1';
+List<String> posCode = [];
+String outcome = 'Other';
+String resultedInFormalReferral = 'N/A';
+String comments;
+
 List<String> referralSourceDropDown = [
   'Community GP',
   'Community Psycologist',
@@ -24,7 +38,6 @@ List<String> referralSourceDropDown = [
   'Palliative Care'
 ];
 
-String referralMode = 'In Person / Corridor';
 List<String> referralModeDropDown = [
   'Email',
   'In Person / Corridor',
@@ -34,10 +47,6 @@ List<String> referralModeDropDown = [
   'Other',
 ];
 
-String urn;
-String dob = '___________';
-
-String gender = 'Male';
 List<String> genderDropDown = [
   'Male',
   'Female',
@@ -46,7 +55,6 @@ List<String> genderDropDown = [
   'Other',
 ];
 
-String discipline = 'Consultant';
 List<String> disciplineDropDown = [
   'Consultant',
   'Registrar',
@@ -55,10 +63,8 @@ List<String> disciplineDropDown = [
   'Other',
 ];
 
-String clTeam = 'Team 1';
 List<String> clTeamDropDown = ['Team 1', 'Team 2', 'Team 3'];
 
-String posCode = '10.01.00 Traige';
 List<String> posCodeDropDown = [
   '10.01.00 Traige',
   '10.05.02 Risk Assessment',
@@ -85,7 +91,6 @@ List<String> posCodeDropDown = [
   '50.04.00 Triage/Intake review'
 ];
 
-String outcome = 'Other';
 List<String> outcomeDropDown = [
   'MH Admission',
   'Discharge to GP',
@@ -95,14 +100,11 @@ List<String> outcomeDropDown = [
   'Other'
 ];
 
-String resultedInFormalReferral = 'N/A';
 List<String> restuledInFormalReferralDropDown = [
   'Yes',
   'No',
   'N/A',
 ];
-
-String comments;
 
 class FormPage extends StatefulWidget {
   final String username;
@@ -119,15 +121,14 @@ class _FormPageState extends State<FormPage> {
     startDate = '___________';
     startTime = '___________';
     sessionDuration = '___________';
-    doctorName = 'Soham';
+    doctorName.add(['', 'Consultant']);
     referralSource = 'Community GP';
     referralMode = 'In Person / Corridor';
     urn = '';
     dob = '___________';
     gender = 'Male';
-    discipline = 'Consultant';
     clTeam = 'Team 1';
-    posCode = '10.01.00 Traige';
+    posCode.add('10.01.00 Traige');
     outcome = 'Other';
     resultedInFormalReferral = 'N/A';
     comments = '';
@@ -175,12 +176,12 @@ class _FormPageState extends State<FormPage> {
                                     color: HexColor('#82cb70'),
                                     fontSize: w * 0.05))
                           ])),
-                          //IconButton(
-                              //icon: Icon(
-                                //Icons.more_vert,
-                                //size: w * 0.08,
-                             // ),
-                             // onPressed: () {})
+                          IconButton(
+                              icon: Icon(
+                                Icons.more_vert,
+                                size: w * 0.08,
+                              ),
+                              onPressed: () {})
                         ],
                       ),
                     ),
@@ -296,33 +297,84 @@ class _FormPageState extends State<FormPage> {
               SizedBox(
                 height: h * 0.02,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: w * 0.035),
-                child: Text(
-                  'Clinician',
-                  style: TextStyle(color: Colors.black, fontSize: w * 0.06),
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: w * 0.035),
+                    child: Text(
+                      'Clinicians',
+                      style: TextStyle(color: Colors.black, fontSize: w * 0.06),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
+                    child: Text(
+                      'Add',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        noOfDoctorTextFields += 1;
+                        doctorName.add(['', 'Consultant']);
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.red[400],
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
+                    child: Text(
+                      'Remove',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (noOfDoctorTextFields > 1) {
+                          noOfDoctorTextFields -= 1;
+                          doctorName.removeLast();
+                        }
+                      });
+                    },
+                  ),
+                ],
               ),
               SizedBox(height: h * 0.02),
               Padding(
                 padding: EdgeInsets.only(left: w * 0.035),
                 child: Text(
-                  'Name (for multiple names, add comma in between)',
+                  'Name(s)',
                   style: TextStyle(color: Colors.black, fontSize: w * 0.04),
                 ),
               ),
-              SizedBox(height: h * 0.01),
               Padding(
-                padding: EdgeInsets.only(left: w * 0.035, right: 20),
-                child: TextFormField(
-                  minLines: null,
-                  maxLines: null,
-                  onChanged: (value) {
-                    setState(() {
-                      doctorName = value;
-                    });
-                  },
-                  decoration: InputDecoration(hintText: 'Enter name(s)'),
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      border: Border.all(color: Colors.green)),
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    itemCount: noOfDoctorTextFields,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ClinicianNames(h, w, index);
+                    },
+                  ),
                 ),
               ),
               SizedBox(height: h * 0.02),
@@ -398,33 +450,88 @@ class _FormPageState extends State<FormPage> {
               SizedBox(
                 height: h * 0.02,
               ),
-              customText(h, w, 'Discipline'),
-              SizedBox(height: h * 0.015),
-              dropDownMenu(h, w, disciplineDropDown, 3),
-              SizedBox(
-                height: h * 0.02,
-              ),
               customText(h, w, 'CL Team'),
               SizedBox(height: h * 0.015),
-              dropDownMenu(h, w, clTeamDropDown, 4),
+              dropDownMenu(h, w, clTeamDropDown, 3),
               SizedBox(
                 height: h * 0.02,
               ),
-              customText(h, w, 'POS Code'),
+              Row(
+                children: [
+                  customText(h, w, 'Intervention'),
+                  SizedBox(width: 20),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
+                    child: Text(
+                      'Add',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        noOfPosDropDowns += 1;
+                        posCode.add('10.01.00 Traige');
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Colors.red[400],
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
+                    child: Text(
+                      'Remove',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        if (noOfPosDropDowns > 1) {
+                          noOfPosDropDowns -= 1;
+                          posCode.removeLast();
+                        }
+                      });
+                    },
+                  ),
+                ],
+              ),
               SizedBox(height: h * 0.015),
-              dropDownMenu(h, w, posCodeDropDown, 5),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  padding: EdgeInsets.only(bottom: 8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      border: Border.all(color: Colors.green)),
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    itemCount: noOfPosDropDowns,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Interventions(h, w, index);
+                    },
+                  ),
+                ),
+              ),
               SizedBox(
                 height: h * 0.02,
               ),
               customText(h, w, 'Outcome'),
               SizedBox(height: h * 0.015),
-              dropDownMenu(h, w, outcomeDropDown, 6),
+              dropDownMenu(h, w, outcomeDropDown, 5),
               SizedBox(
                 height: h * 0.02,
               ),
               customText(h, w, 'Resulted in formal referral'),
               SizedBox(height: h * 0.015),
-              dropDownMenu(h, w, restuledInFormalReferralDropDown, 7),
+              dropDownMenu(h, w, restuledInFormalReferralDropDown, 6),
               SizedBox(
                 height: h * 0.02,
               ),
@@ -464,47 +571,48 @@ class _FormPageState extends State<FormPage> {
                             TextStyle(color: Colors.white, fontSize: h * 0.03),
                       ))),
                   onPressed: () async {
-                    print(startDate +
-                        ' ' +
-                        startTime +
-                        ' ' +
-                        sessionDuration +
-                        ' ' +
-                        doctorName +
-                        ' ' +
-                        referralSource +
-                        ' ' +
-                        referralMode +
-                        ' ' +
-                        dob +
-                        ' ' +
-                        urn +
-                        ' ' +
-                        gender +
-                        ' ' +
-                        discipline +
-                        ' ' +
-                        clTeam +
-                        ' ' +
-                        posCode +
-                        ' ' +
-                        outcome +
-                        ' ' +
-                        resultedInFormalReferral +
-                        ' ' +
-                        comments);
-                    String ans = await uploadDetails();
-                    showSnackBar(ans);
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    String username = prefs.getString('POS_email');
-                    print(username);
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePage(
-                                  username: username,
-                                )));
+                    // print(startDate +
+                    //     ' ' +
+                    //     startTime +
+                    //     ' ' +
+                    //     sessionDuration +
+                    //     ' ' +
+                    //     doctorName.toString() +
+                    //     ' ' +
+                    //     referralSource +
+                    //     ' ' +
+                    //     referralMode +
+                    //     ' ' +
+                    //     dob +
+                    //     ' ' +
+                    //     urn +
+                    //     ' ' +
+                    //     gender +
+                    //     ' ' +
+                    //     discipline +
+                    //     ' ' +
+                    //     clTeam +
+                    //     ' ' +
+                    //     posCode +
+                    //     ' ' +
+                    //     outcome +
+                    //     ' ' +
+                    //     resultedInFormalReferral +
+                    //     ' ' +
+                    //     comments);
+                    print(doctorName);
+                    // String ans = await uploadDetails();
+                    // showSnackBar(ans);
+                    // SharedPreferences prefs =
+                    //     await SharedPreferences.getInstance();
+                    // String username = prefs.getString('POS_email');
+                    // print(username);
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => HomePage(
+                    //               username: username,
+                    //             )));
                   },
                 ),
               ),
@@ -550,14 +658,12 @@ class _FormPageState extends State<FormPage> {
                   : (index == 2)
                       ? gender
                       : (index == 3)
-                          ? discipline
+                          ? clTeam
                           : (index == 4)
-                              ? clTeam
+                              ? posCode
                               : (index == 5)
-                                  ? posCode
-                                  : (index == 6)
-                                      ? outcome
-                                      : resultedInFormalReferral,
+                                  ? outcome
+                                  : resultedInFormalReferral,
           onChanged: (value) {
             setState(() {
               if (index == 0) {
@@ -567,14 +673,12 @@ class _FormPageState extends State<FormPage> {
               } else if (index == 2) {
                 gender = value;
               } else if (index == 3) {
-                discipline = value;
-              } else if (index == 4) {
                 clTeam = value;
-              } else if (index == 5) {
+              } else if (index == 4) {
                 posCode = value;
-              } else if (index == 6) {
+              } else if (index == 5) {
                 outcome = value;
-              } else if (index == 7) {
+              } else if (index == 6) {
                 resultedInFormalReferral = value;
               }
             });
@@ -593,5 +697,119 @@ class _FormPageState extends State<FormPage> {
   void showSnackBar(String ans) {
     final snackBar = SnackBar(content: Text(ans));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Widget ClinicianNames(double h, double w, int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: h * 0.02),
+        Padding(
+          padding: EdgeInsets.only(left: w * 0.035),
+          child: Text(
+            (index + 1).toString() + ". Doctor name",
+            style: TextStyle(color: Colors.black, fontSize: w * 0.04),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: w * 0.06, right: 20),
+          child: TextFormField(
+            onChanged: (value) {
+              setState(() {
+                doctorName[index][0] = value;
+              });
+            },
+            decoration: InputDecoration(hintText: 'Doctor name'),
+          ),
+        ),
+        SizedBox(height: h * 0.015),
+        Padding(
+          padding: EdgeInsets.only(left: w * 0.035),
+          child: Text(
+            (index + 1).toString() + ". Discipline",
+            style: TextStyle(color: Colors.black, fontSize: w * 0.04),
+          ),
+        ),
+        SizedBox(height: h * 0.015),
+        Padding(
+          padding: EdgeInsets.only(left: w * 0.06, right: 30),
+          child: Container(
+            padding: EdgeInsets.only(left: w * 0.035, right: w * 0.035),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                border: Border.all(color: Colors.grey[300])),
+            child: DropdownButton(
+              underline: SizedBox(),
+              icon: Icon(
+                Icons.arrow_drop_down_sharp,
+                color: HexColor('#82cb70'),
+              ),
+              isExpanded: true,
+              iconSize: w * 0.07,
+              value: doctorName[index][1],
+              onChanged: (value) {
+                setState(() {
+                  doctorName[index][1] = value;
+                });
+              },
+              items: disciplineDropDown.map((valueItem) {
+                return DropdownMenuItem(
+                  value: valueItem,
+                  child: Text(valueItem),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget Interventions(double h, double w, int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: h * 0.02),
+        Padding(
+          padding: EdgeInsets.only(left: w * 0.035),
+          child: Text(
+            (index + 1).toString() + ". Intervention",
+            style: TextStyle(color: Colors.black, fontSize: w * 0.04),
+          ),
+        ),
+        SizedBox(height: h * 0.01),
+        Padding(
+          padding: EdgeInsets.only(left: w * 0.06, right: 30),
+          child: Container(
+            padding: EdgeInsets.only(left: w * 0.035, right: w * 0.035),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                border: Border.all(color: Colors.grey[300])),
+            child: DropdownButton(
+              underline: SizedBox(),
+              icon: Icon(
+                Icons.arrow_drop_down_sharp,
+                color: HexColor('#82cb70'),
+              ),
+              isExpanded: true,
+              iconSize: w * 0.07,
+              value: posCode[index],
+              onChanged: (value) {
+                setState(() {
+                  posCode[index] = value;
+                });
+              },
+              items: posCodeDropDown.map((valueItem) {
+                return DropdownMenuItem(
+                  value: valueItem,
+                  child: Text(valueItem),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
+        SizedBox(height: h * 0.015),
+      ],
+    );
   }
 }

@@ -22,7 +22,7 @@ Future<String> uploadDetails() async {
       'DOB': dob,
       'URN': urn,
       'Gender': gender,
-      'Discipline': discipline,
+      //'Discipline': discipline,
       'CL Team': clTeam,
       'POS Code': posCode,
       'Outcome': outcome,
