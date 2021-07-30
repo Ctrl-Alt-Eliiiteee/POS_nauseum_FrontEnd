@@ -107,31 +107,116 @@ List<String> restuledInFormalReferralDropDown = [
 ];
 
 class FormPage extends StatefulWidget {
-  final String username;
-
-  const FormPage({Key key, this.username}) : super(key: key);
+   String username;
+   int check;
+   String startDate;
+   String startTime;
+   String sessionDuration;
+   List doctorName=[];
+   String referralSource;
+   String referralMode;
+   String dob;
+   String urn;
+   String gender;
+   String clTeam;
+   List posCode=[];
+   String outcome;
+   String resultedInFormalReferral;
+   String comments;
+   FormPage({Key key,
+     this.username,
+     this.check,
+   this.startDate,
+   this.startTime,
+   this.sessionDuration,
+   this.doctorName,
+   this.referralSource,
+   this.referralMode,
+   this.dob,
+   this.urn,
+   this.gender,
+   this.clTeam,
+   this.posCode,
+   this.outcome,
+   this.resultedInFormalReferral,
+   this.comments}) : super(key: key);
   @override
   _FormPageState createState() => _FormPageState();
 }
-
+String savedDate='',Savedtime='';
 class _FormPageState extends State<FormPage> {
   void initState() {
     super.initState();
     print(widget.username);
-    startDate = '___________';
-    startTime = '___________';
-    sessionDuration = '___________';
-    doctorName.add(['', 'Consultant']);
-    referralSource = 'Community GP';
-    referralMode = 'In Person / Corridor';
-    urn = '';
-    dob = '___________';
-    gender = 'Male';
-    clTeam = 'Team 1';
-    posCode.add(['10.01.00 Traige', '0']);
-    outcome = 'Other';
-    resultedInFormalReferral = 'N/A';
-    comments = '';
+    if(widget.check==0) {
+      noOfDoctorTextFields=1;
+      noOfPosDropDowns=1;
+      doctorName=[];
+      posCode=[];
+      startDate = '___________';
+      startTime = '___________';
+      sessionDuration = '___________';
+      doctorName.add(['', 'Consultant']);
+      referralSource = 'Community GP';
+      referralMode = 'In Person / Corridor';
+      urn = '';
+      dob = '___________';
+      gender = 'Male';
+      clTeam = 'Team 1';
+      posCode.add(['10.01.00 Traige', '']);
+      outcome = 'Other';
+      resultedInFormalReferral = 'N/A';
+      comments = '';
+    }
+    else{
+      startDate = widget.startDate;
+      startTime = widget.startTime;
+      sessionDuration = widget.sessionDuration;
+      referralSource = widget.referralSource;
+      referralMode = widget.referralMode;
+      urn = widget.urn;
+      dob = widget.dob;
+      gender = widget.gender;
+      clTeam = widget.clTeam;
+      outcome = widget.outcome;
+      resultedInFormalReferral = widget.resultedInFormalReferral;
+      comments = widget.comments;
+      print(widget.startTime);
+      print(widget.startDate);
+      print(widget.sessionDuration);
+      print(widget.referralMode);
+      print(widget.referralSource);
+      print(widget.dob);
+      print(widget.urn);
+      print(widget.gender);
+      print(widget.clTeam);
+      print(widget.outcome);
+      print(widget.resultedInFormalReferral);
+      print(widget.comments);
+
+      noOfDoctorTextFields = widget.doctorName.length;
+      noOfPosDropDowns = widget.posCode.length;
+      print(noOfPosDropDowns);
+      print(noOfDoctorTextFields);
+      savedDate=widget.startDate;
+      Savedtime=widget.startTime;
+      for(int j=0;j<widget.posCode.length;j++){
+        List<String> temp =[];
+        temp.add(widget.posCode[j].values.toList()[0].toString());
+        temp.add(widget.posCode[j].values.toList()[1].toString());
+        posCode.add(temp);
+      }
+      print(posCode);
+      for(int j=0;j<widget.doctorName.length;j++){
+        List<String> temp =[];
+        temp.add(widget.doctorName[j].values.toList()[1].toString());
+        temp.add(widget.doctorName[j].values.toList()[0].toString());
+        // print(widget.doctorName[j].values[0]);
+        doctorName.add(temp);
+      }
+      print(doctorName);
+
+    }
   }
 
   @override
@@ -178,10 +263,12 @@ class _FormPageState extends State<FormPage> {
                           ])),
                           IconButton(
                               icon: Icon(
-                                Icons.more_vert,
+                                Icons.cancel_rounded,
                                 size: w * 0.08,
                               ),
-                              onPressed: () {})
+                              onPressed: () {
+                                Navigator.pop(context);
+                              })
                         ],
                       ),
                     ),
@@ -310,7 +397,7 @@ class _FormPageState extends State<FormPage> {
                   SizedBox(
                     width: 20,
                   ),
-                  TextButton(
+                  ElevatedButton(
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
@@ -330,7 +417,7 @@ class _FormPageState extends State<FormPage> {
                   SizedBox(
                     width: 20,
                   ),
-                  TextButton(
+                  ElevatedButton(
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.red[400],
                         shape: RoundedRectangleBorder(
@@ -432,6 +519,7 @@ class _FormPageState extends State<FormPage> {
               Padding(
                 padding: EdgeInsets.only(left: w * 0.035, right: 20),
                 child: TextFormField(
+                  initialValue: urn,
                   onChanged: (value) {
                     setState(() {
                       urn = value;
@@ -460,7 +548,7 @@ class _FormPageState extends State<FormPage> {
                 children: [
                   customText(h, w, 'Intervention'),
                   SizedBox(width: 20),
-                  TextButton(
+                  ElevatedButton(
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
@@ -480,7 +568,7 @@ class _FormPageState extends State<FormPage> {
                   SizedBox(
                     width: 20,
                   ),
-                  TextButton(
+                  ElevatedButton(
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.red[400],
                         shape: RoundedRectangleBorder(
@@ -542,6 +630,7 @@ class _FormPageState extends State<FormPage> {
                 child: TextFormField(
                   minLines: null,
                   maxLines: null,
+                  initialValue: comments,
                   onChanged: (value) {
                     setState(() {
                       comments = value;
@@ -554,7 +643,7 @@ class _FormPageState extends State<FormPage> {
                 height: h * 0.02,
               ),
               Center(
-                child: TextButton(
+                child: ElevatedButton(
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.all(0),
                   ),
@@ -604,18 +693,25 @@ class _FormPageState extends State<FormPage> {
                     print(doctorName);
                     print("Intervention Code");
                     print(posCode);
-                    // String ans = await uploadDetails();
-                    // showSnackBar(ans);
-                    // SharedPreferences prefs =
-                    //     await SharedPreferences.getInstance();
-                    // String username = prefs.getString('POS_email');
-                    // print(username);
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) => HomePage(
-                    //               username: username,
-                    //             )));
+                    var ans='';
+                    if(widget.check==1){
+                      ans=await editDetails();
+                    }
+                    else{
+                      ans==await uploadDetails();
+                    }
+                    print(ans);
+                    showSnackBar(ans);
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    String username = prefs.getString('POS_email');
+                    print(username);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage(
+                                  username: username,
+                                )));
                   },
                 ),
               ),
@@ -717,6 +813,7 @@ class _FormPageState extends State<FormPage> {
         Padding(
           padding: EdgeInsets.only(left: w * 0.06, right: 20),
           child: TextFormField(
+            initialValue: doctorName[index][0],
             onChanged: (value) {
               setState(() {
                 doctorName[index][0] = value;
@@ -820,6 +917,7 @@ class _FormPageState extends State<FormPage> {
               padding: EdgeInsets.only(right: w / 2, left: w * 0.06),
               child: TextFormField(
                 keyboardType: TextInputType.number,
+                initialValue: posCode[index][1],
                 onChanged: (value) {
                   setState(() {
                     posCode[index][1] = value;

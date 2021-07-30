@@ -3,9 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:pos/Form.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+Future<String> editDetails() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String username = prefs.getString('POS_email');
+  try{
+    await FirebaseFirestore.instance
+        .collection("Details")
+        .doc(username.substring(0, username.indexOf('@')))
+        .collection("Timings")
+        .doc(savedDate.replaceAll("/", "-") + " " + Savedtime).delete();
+    return await uploadDetails();
+  }catch(e){
+    return "Please Try after sometime";
+  }
+}
 Future<String> uploadDetails() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String username = prefs.getString('POS_email');
+  List ClinicanList =[];
+  for(int i=0;i<doctorName.length;i++){
+    ClinicanList.add({
+      "Name" : doctorName[i][0],
+      "Discipline" : doctorName[i][1],
+    });
+  }
+  List PosCode =[];
+  for(int i=0;i<posCode.length;i++){
+    PosCode.add({
+      "posCode" : posCode[i][0],
+      "time" : posCode[i][1],
+    });
+  }
   try {
     await FirebaseFirestore.instance
         .collection("Details")
@@ -16,15 +44,16 @@ Future<String> uploadDetails() async {
       'Start Date': startDate,
       'Start Time': startTime,
       'Duration': sessionDuration,
-      'Name of Doctors': doctorName,
+      // 'Name of Doctors': doctorName,
       'Referral Source': referralSource,
       'Referral Mode': referralMode,
       'DOB': dob,
       'URN': urn,
       'Gender': gender,
       //'Discipline': discipline,
+      "Clinicians" : FieldValue.arrayUnion(ClinicanList),
       'CL Team': clTeam,
-      'POS Code': posCode,
+      'POS CodeList': FieldValue.arrayUnion(PosCode),
       'Outcome': outcome,
       'Resulted in formal referral': resultedInFormalReferral,
       'Comments': comments,
@@ -34,7 +63,6 @@ Future<String> uploadDetails() async {
     return username.toString();
   }
 }
-
 Future<List<object>> getdetails() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String username = prefs.getString('POS_email');
@@ -47,18 +75,25 @@ Future<List<object>> getdetails() async {
         .get()
         .then((value) {
       value.docs.forEach((result) {
+        // List doctorName =[];
         String startDate = result.data()['Start Date'];
         String starttime = result.data()['Start Time'];
         String sessionDuration = result.data()['Duration'];
-        String doctorName = result.data()['Name of Doctors'];
+        // List.from(result.data()['Clinicians']).forEach((element) {
+        //   doctorName.add({element.get('Name'),element.get('Discipline')});
+        // });
+         var doctorName = result.data()['Clinicians'];
+        print(doctorName);
         String referralSource = result.data()['Referral Source'];
         String referralmode = result.data()['Referral Mode'];
         String dob = result.data()['DOB'];
         String urn = result.data()['URN'];
         String gender = result.data()['Gender'];
-        String discipline = result.data()['Discipline'];
+        // String discipline = result.data()['Discipline'];
         String clteam = result.data()['CL Team'];
-        String posCode = result.data()['POS Code'];
+       var posCode = result.data()['POS CodeList'];
+       print(posCode);
+
         String outcome = result.data()['Outcome'];
         String restuledInFormalReferral =
             result.data()['Resulted in formal referral'];
@@ -73,9 +108,8 @@ Future<List<object>> getdetails() async {
             dob: dob,
             urn: urn,
             gender: gender,
-            discipline: discipline,
             clTeam: clteam,
-            posCode: posCode,
+            poscode: posCode,
             outcome: outcome,
             restuledInFormalReferral: restuledInFormalReferral,
             comments: comments);
@@ -92,18 +126,17 @@ class object {
   String startDate,
       startTime,
       sessionDuration,
-      doctorNames,
+
       referralSource,
       referralMode,
       dob,
       urn,
       gender,
-      discipline,
       clTeam,
-      posCode,
       outcome,
       restuledInFormalReferral,
       comments;
+  List doctorNames=[],poscode=[];
 
   object(
       {this.startDate,
@@ -115,9 +148,8 @@ class object {
       this.dob,
       this.urn,
       this.gender,
-      this.discipline,
       this.clTeam,
-      this.posCode,
+      this.poscode,
       this.outcome,
       this.restuledInFormalReferral,
       this.comments});

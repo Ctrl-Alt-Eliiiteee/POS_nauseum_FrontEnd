@@ -58,8 +58,8 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                       builder: (context) => FormPage(
                             username: widget.username
-                                .substring(0, widget.username.indexOf('@')),
-                          )));
+                                .substring(0, widget.username.indexOf('@')),check: 0,)
+                  ));
             },
           ),
           body: Stack(
@@ -261,7 +261,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: [
                   SizedBox(height: 10),
-                  TextButton(
+                  ElevatedButton(
                     style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius:
@@ -271,37 +271,54 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Details(
-                                    username: widget.username.substring(
-                                        0, widget.username.indexOf('@')),
-                                    startDate:
-                                        meetingsFromSelectedDate[c].startDate,
-                                    startTime:
-                                        meetingsFromSelectedDate[c].startTime,
-                                    sessionDuration: meetingsFromSelectedDate[c]
-                                        .sessionDuration,
-                                    doctorName:
-                                        meetingsFromSelectedDate[c].eventName,
-                                    referralSource: meetingsFromSelectedDate[c]
-                                        .referralSource,
-                                    referralMode: meetingsFromSelectedDate[c]
-                                        .referralMode,
-                                    dob: meetingsFromSelectedDate[c].dob,
-                                    urn: meetingsFromSelectedDate[c].urn,
-                                    gender: meetingsFromSelectedDate[c].gender,
-                                    discipline:
-                                        meetingsFromSelectedDate[c].discipline,
-                                    clTeam: meetingsFromSelectedDate[c].clTeam,
-                                    posCode:
-                                        meetingsFromSelectedDate[c].posCode,
-                                    outcome:
-                                        meetingsFromSelectedDate[c].outcome,
-                                    resultedInFormalReferral:
-                                        meetingsFromSelectedDate[c]
-                                            .restuledInFormalReferral,
-                                    comments:
-                                        meetingsFromSelectedDate[c].comments,
-                                  )));
+                            builder: (context)=>FormPage(
+                              username: widget.username.substring(0,widget.username.indexOf('@')),
+                              check: 1,
+                              startDate: meetingsFromSelectedDate[c].startDate,
+                              startTime: meetingsFromSelectedDate[c].startTime,
+                              sessionDuration:  meetingsFromSelectedDate[c].sessionDuration,
+                              doctorName: meetingsFromSelectedDate[c].doctorNames,
+                              referralSource: meetingsFromSelectedDate[c].referralSource,
+                              referralMode: meetingsFromSelectedDate[c].referralMode,
+                              dob: meetingsFromSelectedDate[c].dob,
+                              urn: meetingsFromSelectedDate[c].urn,
+                              gender: meetingsFromSelectedDate[c].gender,
+                              clTeam: meetingsFromSelectedDate[c].clTeam,
+                              posCode: meetingsFromSelectedDate[c].posCode,
+                              outcome: meetingsFromSelectedDate[c].outcome,
+                              resultedInFormalReferral: meetingsFromSelectedDate[c].restuledInFormalReferral,
+                              comments: meetingsFromSelectedDate[c].comments,
+                        //           .sessionDuration ,)
+                              // builder: (context) => Details(
+                              //       username: widget.username.substring(
+                              //           0, widget.username.indexOf('@')),
+                              //       startDate:
+                              //           meetingsFromSelectedDate[c].startDate,
+                              //       startTime:
+                              //           meetingsFromSelectedDate[c].startTime,
+                              //       sessionDuration: meetingsFromSelectedDate[c]
+                              //           .sessionDuration,
+                              //       doctorName:
+                              //           meetingsFromSelectedDate[c].eventName,
+                              //       referralSource: meetingsFromSelectedDate[c]
+                              //           .referralSource,
+                              //       referralMode: meetingsFromSelectedDate[c]
+                              //           .referralMode,
+                              //       dob: meetingsFromSelectedDate[c].dob,
+                              //       urn: meetingsFromSelectedDate[c].urn,
+                              //       gender: meetingsFromSelectedDate[c].gender,
+                              //       clTeam: meetingsFromSelectedDate[c].clTeam,
+                              //       posCode:
+                              //           meetingsFromSelectedDate[c].posCode,
+                              //       outcome:
+                              //           meetingsFromSelectedDate[c].outcome,
+                              //       resultedInFormalReferral:
+                              //           meetingsFromSelectedDate[c]
+                              //               .restuledInFormalReferral,
+                              //       comments:
+                              //           meetingsFromSelectedDate[c].comments,
+                              //     )
+                          )));
                     },
                     child: Container(
                       padding: EdgeInsets.all(20),
@@ -347,7 +364,7 @@ List<Meeting> _getDataSource() {
         DateFormat('d/M/yyyy').parse(_loadDetailsFromFirebase[c].startDate);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
     meetings.add(Meeting(
-        _loadDetailsFromFirebase[c].doctorNames,
+        _loadDetailsFromFirebase[c].doctorNames[0].values.toList()[1],
         startTime,
         endTime,
         const Color(0xFF0F8644),
@@ -355,14 +372,14 @@ List<Meeting> _getDataSource() {
         _loadDetailsFromFirebase[c].startDate,
         _loadDetailsFromFirebase[c].startTime,
         _loadDetailsFromFirebase[c].sessionDuration,
+        _loadDetailsFromFirebase[c].doctorNames,
         _loadDetailsFromFirebase[c].referralSource,
         _loadDetailsFromFirebase[c].referralMode,
         _loadDetailsFromFirebase[c].dob,
         _loadDetailsFromFirebase[c].urn,
         _loadDetailsFromFirebase[c].gender,
-        _loadDetailsFromFirebase[c].discipline,
         _loadDetailsFromFirebase[c].clTeam,
-        _loadDetailsFromFirebase[c].posCode,
+        _loadDetailsFromFirebase[c].poscode,
         _loadDetailsFromFirebase[c].outcome,
         _loadDetailsFromFirebase[c].restuledInFormalReferral,
         _loadDetailsFromFirebase[c].comments));
@@ -445,12 +462,12 @@ class Meeting {
       this.startDate,
       this.startTime,
       this.sessionDuration,
+      this.doctorNames,
       this.referralSource,
       this.referralMode,
       this.dob,
       this.urn,
       this.gender,
-      this.discipline,
       this.clTeam,
       this.posCode,
       this.outcome,
@@ -475,15 +492,15 @@ class Meeting {
   String startDate;
   String startTime;
   String sessionDuration;
-  String doctorNames;
+  List doctorNames=[];
   String referralSource;
   String referralMode;
   String dob;
   String urn;
   String gender;
-  String discipline;
+  // String discipline;
   String clTeam;
-  String posCode;
+  List posCode=[];
   String outcome;
   String restuledInFormalReferral;
   String comments;
