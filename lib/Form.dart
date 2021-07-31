@@ -17,7 +17,7 @@ int noOfDoctorTextFields = 1;
 
 int noOfPosDropDowns = 1;
 
-bool isLoading = false;
+bool _isLoading = false;
 
 String referralSource = 'Community GP';
 String referralMode = 'In Person / Corridor';
@@ -214,8 +214,10 @@ class _FormPageState extends State<FormPage> {
       outcome = 'Other';
       resultedInFormalReferral = 'N/A';
       comments = '';
-      isLoading = false;
+      _isLoading = false;
     } else {
+      doctorName = [];
+      posCode = [];
       startDate = widget.startDate;
       startTime = widget.startTime;
       sessionDuration = widget.sessionDuration;
@@ -228,7 +230,7 @@ class _FormPageState extends State<FormPage> {
       outcome = widget.outcome;
       resultedInFormalReferral = widget.resultedInFormalReferral;
       comments = widget.comments;
-      isLoading = false;
+      _isLoading = false;
       print(widget.startTime);
       print(widget.startDate);
       print(widget.sessionDuration);
@@ -275,7 +277,7 @@ class _FormPageState extends State<FormPage> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          isLoading
+          _isLoading
               ? Container(
                   height: h,
                   width: w,
@@ -289,7 +291,7 @@ class _FormPageState extends State<FormPage> {
                 )
               : Container(),
           AbsorbPointer(
-            absorbing: isLoading,
+            absorbing: _isLoading,
             child: Container(
               height: h,
               width: w,
@@ -1016,7 +1018,7 @@ class _FormPageState extends State<FormPage> {
       onPressed: () async {
         Navigator.pop(context);
         setState(() {
-          isLoading = true;
+          _isLoading = true;
         });
         var ans = '';
         if (widget.check == 1) {
@@ -1030,7 +1032,7 @@ class _FormPageState extends State<FormPage> {
         String username = prefs.getString('POS_email');
         print(username);
         setState(() {
-          isLoading = false;
+          _isLoading = false;
         });
         Navigator.pushReplacement(
             context,

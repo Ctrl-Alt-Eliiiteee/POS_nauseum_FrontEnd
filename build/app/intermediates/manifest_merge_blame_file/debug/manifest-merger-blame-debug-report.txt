@@ -26,8 +26,8 @@
 20        android:debuggable="true"
 21        android:icon="@mipmap/ic_launcher"
 21-->/home/soham/flutter_projects/POS-nauseum/android/app/src/main/AndroidManifest.xml:5:9-43
-22        android:label="POS-Nauseum" >
-22-->/home/soham/flutter_projects/POS-nauseum/android/app/src/main/AndroidManifest.xml:4:9-36
+22        android:label="POS-eMetrics" >
+22-->/home/soham/flutter_projects/POS-nauseum/android/app/src/main/AndroidManifest.xml:4:9-37
 23        <activity
 23-->/home/soham/flutter_projects/POS-nauseum/android/app/src/main/AndroidManifest.xml:6:9-34:20
 24            android:name="com.example.pos.MainActivity"
