@@ -1087,11 +1087,11 @@ class _FormPageState extends State<FormPage> {
               Text("\nInterventions: "),
               for (int index = 0; index < posCode.length; index++)
                 Text((index + 1).toString() +
-                    ". Doctor: " +
+                    ". Intervention: " +
                     posCode[index][0] +
                     '\n' +
                     ((index + 1).toString() +
-                        '. Discipline: ' +
+                        '. Time: ' +
                         posCode[index][1])),
               Text("\n"),
               Text("Total time: " + sessionDuration),
