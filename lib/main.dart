@@ -4,6 +4,7 @@ import 'package:pos/Cal.dart';
 import 'package:pos/Login.dart';
 import 'package:pos/helperfunctions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 String email;
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,8 +26,6 @@ Future main() async {
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: (email.contains('@') && email.contains('.com'))
-        ? HomePage(username: email)
-        : LoginPage(),
+    home: LoginPage(),
   ));
 }
