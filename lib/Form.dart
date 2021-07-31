@@ -31,6 +31,46 @@ String resultedInFormalReferral = 'N/A';
 String comments;
 
 List<String> referralSourceDropDown = [
+  'Med 1A',
+  'Med 1B',
+  'Med 2A',
+  'Med 2B',
+  'Med 3A',
+  'Med 3B',
+  'Med 4A',
+  'Med 4B',
+  'RESP',
+  'CARD',
+  'STROKE',
+  'NEURO',
+  'ENDO',
+  'RHEUM',
+  'ID',
+  'ICU',
+  'BURNS',
+  'RENAL',
+  'EPIC',
+  'HAEM',
+  'ONC',
+  'GYN ONC',
+  'DERM',
+  'MDPC',
+  'ENT',
+  'PLASTICS',
+  'MAX FAX',
+  'THORACIC',
+  'ORTHO 1',
+  'ORTHO TRAUMA',
+  'ORTHO 3',
+  'ORTHO 4 & 5',
+  'GASTRO LIVER',
+  'MATERNITY ',
+  'GYN OPD',
+  'VASCULAR',
+  'OPTHAL',
+  'IHT MED',
+  'IHT MH & CL',
+  'Community MH',
   'Community GP',
   'Community Psycologist',
   'Community Psychiatrist',
@@ -164,7 +204,7 @@ class _FormPageState extends State<FormPage> {
       startTime = '___________';
       sessionDuration = '0';
       doctorName.add(['', 'Consultant']);
-      referralSource = 'Community GP';
+      referralSource = 'Med 1A';
       referralMode = 'In Person / Corridor';
       urn = '';
       dob = '___________';
