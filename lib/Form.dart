@@ -1024,7 +1024,7 @@ class _FormPageState extends State<FormPage> {
         if (widget.check == 1) {
           ans = await editDetails();
         } else {
-          ans == await uploadDetails();
+          ans = await uploadDetails();
         }
         print(ans);
         showSnackBar(ans);
