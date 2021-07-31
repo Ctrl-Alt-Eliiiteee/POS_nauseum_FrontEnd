@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pos/Form.dart';
 import 'package:pos/Login.dart';
-import 'package:pos/detailspage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'helperfunctions.dart';
@@ -11,7 +10,7 @@ import 'package:intl/intl.dart';
 class CalendarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Calendar Demo',
       home: HomePage(),
@@ -58,8 +57,9 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                       builder: (context) => FormPage(
                             username: widget.username
-                                .substring(0, widget.username.indexOf('@')),check: 0,)
-                  ));
+                                .substring(0, widget.username.indexOf('@')),
+                            check: 0,
+                          )));
             },
           ),
           body: Stack(
@@ -268,57 +268,70 @@ class _HomePageState extends State<HomePage> {
                                 BorderRadius.all(Radius.circular(15))),
                         padding: EdgeInsets.all(0)),
                     onPressed: () {
+                      print(meetingsFromSelectedDate[c].doctorNames.toString());
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context)=>FormPage(
-                              username: widget.username.substring(0,widget.username.indexOf('@')),
-                              check: 1,
-                              startDate: meetingsFromSelectedDate[c].startDate,
-                              startTime: meetingsFromSelectedDate[c].startTime,
-                              sessionDuration:  meetingsFromSelectedDate[c].sessionDuration,
-                              doctorName: meetingsFromSelectedDate[c].doctorNames,
-                              referralSource: meetingsFromSelectedDate[c].referralSource,
-                              referralMode: meetingsFromSelectedDate[c].referralMode,
-                              dob: meetingsFromSelectedDate[c].dob,
-                              urn: meetingsFromSelectedDate[c].urn,
-                              gender: meetingsFromSelectedDate[c].gender,
-                              clTeam: meetingsFromSelectedDate[c].clTeam,
-                              posCode: meetingsFromSelectedDate[c].posCode,
-                              outcome: meetingsFromSelectedDate[c].outcome,
-                              resultedInFormalReferral: meetingsFromSelectedDate[c].restuledInFormalReferral,
-                              comments: meetingsFromSelectedDate[c].comments,
-                        //           .sessionDuration ,)
-                              // builder: (context) => Details(
-                              //       username: widget.username.substring(
-                              //           0, widget.username.indexOf('@')),
-                              //       startDate:
-                              //           meetingsFromSelectedDate[c].startDate,
-                              //       startTime:
-                              //           meetingsFromSelectedDate[c].startTime,
-                              //       sessionDuration: meetingsFromSelectedDate[c]
-                              //           .sessionDuration,
-                              //       doctorName:
-                              //           meetingsFromSelectedDate[c].eventName,
-                              //       referralSource: meetingsFromSelectedDate[c]
-                              //           .referralSource,
-                              //       referralMode: meetingsFromSelectedDate[c]
-                              //           .referralMode,
-                              //       dob: meetingsFromSelectedDate[c].dob,
-                              //       urn: meetingsFromSelectedDate[c].urn,
-                              //       gender: meetingsFromSelectedDate[c].gender,
-                              //       clTeam: meetingsFromSelectedDate[c].clTeam,
-                              //       posCode:
-                              //           meetingsFromSelectedDate[c].posCode,
-                              //       outcome:
-                              //           meetingsFromSelectedDate[c].outcome,
-                              //       resultedInFormalReferral:
-                              //           meetingsFromSelectedDate[c]
-                              //               .restuledInFormalReferral,
-                              //       comments:
-                              //           meetingsFromSelectedDate[c].comments,
-                              //     )
-                          )));
+                              builder: (context) => FormPage(
+                                    username: widget.username.substring(
+                                        0, widget.username.indexOf('@')),
+                                    check: 1,
+                                    startDate:
+                                        meetingsFromSelectedDate[c].startDate,
+                                    startTime:
+                                        meetingsFromSelectedDate[c].startTime,
+                                    sessionDuration: meetingsFromSelectedDate[c]
+                                        .sessionDuration,
+                                    doctorName:
+                                        meetingsFromSelectedDate[c].doctorNames,
+                                    referralSource: meetingsFromSelectedDate[c]
+                                        .referralSource,
+                                    referralMode: meetingsFromSelectedDate[c]
+                                        .referralMode,
+                                    dob: meetingsFromSelectedDate[c].dob,
+                                    urn: meetingsFromSelectedDate[c].urn,
+                                    gender: meetingsFromSelectedDate[c].gender,
+                                    clTeam: meetingsFromSelectedDate[c].clTeam,
+                                    posCode:
+                                        meetingsFromSelectedDate[c].posCode,
+                                    outcome:
+                                        meetingsFromSelectedDate[c].outcome,
+                                    resultedInFormalReferral:
+                                        meetingsFromSelectedDate[c]
+                                            .restuledInFormalReferral,
+                                    comments:
+                                        meetingsFromSelectedDate[c].comments,
+                                    //           .sessionDuration ,)
+                                    // builder: (context) => Details(
+                                    //       username: widget.username.substring(
+                                    //           0, widget.username.indexOf('@')),
+                                    //       startDate:
+                                    //           meetingsFromSelectedDate[c].startDate,
+                                    //       startTime:
+                                    //           meetingsFromSelectedDate[c].startTime,
+                                    //       sessionDuration: meetingsFromSelectedDate[c]
+                                    //           .sessionDuration,
+                                    //       doctorName:
+                                    //           meetingsFromSelectedDate[c].eventName,
+                                    //       referralSource: meetingsFromSelectedDate[c]
+                                    //           .referralSource,
+                                    //       referralMode: meetingsFromSelectedDate[c]
+                                    //           .referralMode,
+                                    //       dob: meetingsFromSelectedDate[c].dob,
+                                    //       urn: meetingsFromSelectedDate[c].urn,
+                                    //       gender: meetingsFromSelectedDate[c].gender,
+                                    //       clTeam: meetingsFromSelectedDate[c].clTeam,
+                                    //       posCode:
+                                    //           meetingsFromSelectedDate[c].posCode,
+                                    //       outcome:
+                                    //           meetingsFromSelectedDate[c].outcome,
+                                    //       resultedInFormalReferral:
+                                    //           meetingsFromSelectedDate[c]
+                                    //               .restuledInFormalReferral,
+                                    //       comments:
+                                    //           meetingsFromSelectedDate[c].comments,
+                                    //     )
+                                  )));
                     },
                     child: Container(
                       padding: EdgeInsets.all(20),
@@ -492,7 +505,7 @@ class Meeting {
   String startDate;
   String startTime;
   String sessionDuration;
-  List doctorNames=[];
+  List doctorNames = [];
   String referralSource;
   String referralMode;
   String dob;
@@ -500,7 +513,7 @@ class Meeting {
   String gender;
   // String discipline;
   String clTeam;
-  List posCode=[];
+  List posCode = [];
   String outcome;
   String restuledInFormalReferral;
   String comments;
