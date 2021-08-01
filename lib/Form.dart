@@ -210,7 +210,7 @@ class _FormPageState extends State<FormPage> {
       dob = '___________';
       gender = 'Male';
       clTeam = 'Team 1';
-      posCode.add(['10.01.00 Traige', '']);
+      posCode.add(['10.01.00 Triage', '']);
       outcome = 'Other';
       resultedInFormalReferral = 'N/A';
       comments = '';
@@ -601,7 +601,7 @@ class _FormPageState extends State<FormPage> {
                           onPressed: () {
                             setState(() {
                               noOfPosDropDowns += 1;
-                              posCode.add(['10.01.00 Traige', '']);
+                              posCode.add(['10.01.00 Triage', '']);
                             });
                           },
                         ),
