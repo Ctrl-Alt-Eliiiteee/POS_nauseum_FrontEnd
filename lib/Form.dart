@@ -109,14 +109,14 @@ List<String> disciplineDropDown = [
 List<String> clTeamDropDown = ['Team 1', 'Team 2', 'Team 3'];
 
 List<String> posCodeDropDown = [
-  '10.01.00 Traige',
+  '10.01.00 Triage',
   '10.05.02 Risk Assessment',
-  '20.01.07 Psycoeducation',
+  '20.01.07 Psychoeducation',
   '20.05.00 Pharmacotherapy Interventions',
   '20.05.01 Review (pharmacotherapy)',
-  '20.05.02 Monitering (pharmacotherapy)',
+  '20.05.02 Monitoring (pharmacotherapy)',
   '20.05.04 Coordination (pharmacotherapy)',
-  '20.08.00 Ongoing monitering and support',
+  '20.08.00 Ongoing monitoring and support',
   '20.09.00 Crisis response',
   '20.10.00 Family/Carer focused interventions',
   '20.99.00 Support, interventions and therapies NEC',
@@ -137,9 +137,9 @@ List<String> posCodeDropDown = [
 List<String> outcomeDropDown = [
   'MH Admission',
   'Discharge to GP',
-  'Discahrge to ACT',
-  'Discahrge to CCT',
-  'Discahrge to no follow up',
+  'Discharge to ACT',
+  'Discharge to CCT',
+  'Discharge to no follow up',
   'Other'
 ];
 
