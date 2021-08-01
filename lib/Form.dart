@@ -72,7 +72,7 @@ List<String> referralSourceDropDown = [
   'IHT MH & CL',
   'Community MH',
   'Community GP',
-  'Community Psycologist',
+  'Community Psychologist',
   'Community Psychiatrist',
   'Community Other',
   'Pain Team',
