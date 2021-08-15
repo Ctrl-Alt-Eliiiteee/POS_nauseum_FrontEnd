@@ -31,6 +31,7 @@ String resultedInFormalReferral = 'N/A';
 String comments;
 
 List<String> referralSourceDropDown = [
+  '--Please Select--',
   'Med 1A',
   'Med 1B',
   'Med 2A',
@@ -204,9 +205,9 @@ class _FormPageState extends State<FormPage> {
       startTime = '___________';
       sessionDuration = '0';
       doctorName.add(['', 'Consultant']);
-      referralSource = 'Med 1A';
+      referralSource = '--Please Select--';
       referralMode = 'In Person / Corridor';
-      urn = '';
+      urn = ' ';
       dob = '___________';
       gender = 'Male';
       clTeam = 'Team 1';
@@ -351,8 +352,17 @@ class _FormPageState extends State<FormPage> {
                             TextStyle(color: Colors.black, fontSize: w * 0.06),
                       ),
                     ),
+                    SizedBox(height: h * 0.01),
+                    Padding(
+                      padding: EdgeInsets.only(left: w * 0.04),
+                      child: Text(
+                        '* - required detail',
+                        style:
+                            TextStyle(color: Colors.black, fontSize: w * 0.035),
+                      ),
+                    ),
                     SizedBox(height: h * 0.02),
-                    customText(h, w, 'Start Date and Time'),
+                    customText(h, w, 'Start Date and Time *'),
                     Padding(
                       padding: EdgeInsets.only(left: 10, right: w * 0.1),
                       child: Row(
@@ -481,7 +491,7 @@ class _FormPageState extends State<FormPage> {
                     Padding(
                       padding: EdgeInsets.only(left: w * 0.035),
                       child: Text(
-                        'Name(s)',
+                        'Name(s) * ',
                         style:
                             TextStyle(color: Colors.black, fontSize: w * 0.04),
                       ),
@@ -513,7 +523,7 @@ class _FormPageState extends State<FormPage> {
                     SizedBox(
                       height: h * 0.02,
                     ),
-                    customText(h, w, 'Referral mode'),
+                    customText(h, w, 'Referral mode *'),
                     SizedBox(
                       height: h * 0.015,
                     ),
@@ -578,7 +588,7 @@ class _FormPageState extends State<FormPage> {
                     SizedBox(
                       height: h * 0.02,
                     ),
-                    customText(h, w, 'CL Team'),
+                    customText(h, w, 'CL Team *'),
                     SizedBox(height: h * 0.015),
                     dropDownMenu(h, w, clTeamDropDown, 3),
                     SizedBox(
@@ -586,7 +596,7 @@ class _FormPageState extends State<FormPage> {
                     ),
                     Row(
                       children: [
-                        customText(h, w, 'Intervention'),
+                        customText(h, w, 'Intervention*'),
                         SizedBox(width: 20),
                         ElevatedButton(
                           style: TextButton.styleFrom(
@@ -623,6 +633,7 @@ class _FormPageState extends State<FormPage> {
                               if (noOfPosDropDowns > 1) {
                                 noOfPosDropDowns -= 1;
                                 posCode.removeLast();
+                                calculateTotalTime();
                               }
                             });
                           },
@@ -765,7 +776,8 @@ class _FormPageState extends State<FormPage> {
                           if (isempty == true) {
                             showAlertDialog(context);
                           } else {
-                            showConfirmDialog(context);
+                            print("Done");
+                            //showConfirmDialog(context);
                           }
                         },
                       ),
@@ -994,7 +1006,7 @@ class _FormPageState extends State<FormPage> {
                     calculateTotalTime();
                   });
                 },
-                decoration: InputDecoration(hintText: 'Time (in minutes)'),
+                decoration: InputDecoration(labelText: 'Time (in minutes)'),
               ),
             )
           ],
@@ -1068,10 +1080,10 @@ class _FormPageState extends State<FormPage> {
             children: [
               Text("Start date: " + startDate),
               Text("Start time: " + startTime),
-              Text("\nDoctors: "),
+              Text("\nClinicians: "),
               for (int index = 0; index < doctorName.length; index++)
                 Text((index + 1).toString() +
-                    ". Doctor: " +
+                    ". Clinician: " +
                     doctorName[index][0] +
                     '\n' +
                     ((index + 1).toString() +
@@ -1090,9 +1102,7 @@ class _FormPageState extends State<FormPage> {
                     ". Intervention: " +
                     posCode[index][0] +
                     '\n' +
-                    ((index + 1).toString() +
-                        '. Time: ' +
-                        posCode[index][1])),
+                    ((index + 1).toString() + '. Time: ' + posCode[index][1])),
               Text("\n"),
               Text("Total time: " + sessionDuration),
               Text("Outcome: " + outcome),
