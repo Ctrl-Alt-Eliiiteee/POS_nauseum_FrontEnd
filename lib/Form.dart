@@ -31,7 +31,7 @@ String resultedInFormalReferral = 'N/A';
 String comments;
 
 List<String> referralSourceDropDown = [
-  '--Please Select--',
+  '-----------Please select---------',
   'Med 1A',
   'Med 1B',
   'Med 2A',
@@ -83,6 +83,7 @@ List<String> referralSourceDropDown = [
 ];
 
 List<String> referralModeDropDown = [
+  '-----------Please select---------',
   'Email',
   'In Person / Corridor',
   'Telephone',
@@ -92,6 +93,7 @@ List<String> referralModeDropDown = [
 ];
 
 List<String> genderDropDown = [
+  '-----------Please select---------',
   'Male',
   'Female',
   'Transgender',
@@ -100,6 +102,7 @@ List<String> genderDropDown = [
 ];
 
 List<String> disciplineDropDown = [
+  '-----------Please select---------',
   'Consultant',
   'Registrar',
   'CNC',
@@ -107,9 +110,15 @@ List<String> disciplineDropDown = [
   'Other',
 ];
 
-List<String> clTeamDropDown = ['Team 1', 'Team 2', 'Team 3'];
+List<String> clTeamDropDown = [
+  '-----------Please select---------',
+  'Team 1',
+  'Team 2',
+  'Team 3'
+];
 
 List<String> posCodeDropDown = [
+  '-----------Please select---------',
   '10.01.00 Triage',
   '10.05.02 Risk Assessment',
   '20.01.07 Psychoeducation',
@@ -136,6 +145,7 @@ List<String> posCodeDropDown = [
 ];
 
 List<String> outcomeDropDown = [
+  '-----------Please select---------',
   'MH Admission',
   'Discharge to GP',
   'Discharge to ACT',
@@ -145,6 +155,7 @@ List<String> outcomeDropDown = [
 ];
 
 List<String> restuledInFormalReferralDropDown = [
+  '-----------Please select---------',
   'Yes',
   'No',
   'N/A',
@@ -204,17 +215,17 @@ class _FormPageState extends State<FormPage> {
       startDate = '___________';
       startTime = '___________';
       sessionDuration = '0';
-      doctorName.add(['', 'Consultant']);
-      referralSource = '--Please Select--';
-      referralMode = 'In Person / Corridor';
+      doctorName.add(['', '-----------Please select---------']);
+      referralSource = '-----------Please select---------';
+      referralMode = '-----------Please select---------';
       urn = ' ';
       dob = '___________';
-      gender = 'Male';
-      clTeam = 'Team 1';
-      posCode.add(['10.01.00 Triage', '']);
-      outcome = 'Other';
-      resultedInFormalReferral = 'N/A';
-      comments = '';
+      gender = '-----------Please select---------';
+      clTeam = '-----------Please select---------';
+      posCode.add(['-----------Please select---------', '']);
+      outcome = '-----------Please select---------';
+      resultedInFormalReferral = '-----------Please select---------';
+      comments = ' ';
       _isLoading = false;
     } else {
       doctorName = [];
@@ -267,6 +278,31 @@ class _FormPageState extends State<FormPage> {
       }
       print(doctorName);
     }
+  }
+
+  bool checkIsEmpty() {
+    bool isempty = false;
+    if (startDate == '___________' ||
+        startTime == '___________' ||
+        referralMode == '-----------Please select---------' ||
+        clTeam == '-----------Please select---------' ||
+        outcome == '-----------Please select---------' ||
+        resultedInFormalReferral == '-----------Please select---------') {
+      isempty = true;
+    }
+    for (int c = 0; c < doctorName.length; c++) {
+      if (doctorName[c][0] == '' ||
+          doctorName[c][1] == '-----------Please select---------') {
+        isempty = true;
+      }
+    }
+    for (int c = 0; c < posCode.length; c++) {
+      if (posCode[c][1] == '' ||
+          posCode[c][0] == '-----------Please select---------') {
+        isempty = true;
+      }
+    }
+    return isempty;
   }
 
   @override
@@ -675,13 +711,13 @@ class _FormPageState extends State<FormPage> {
                     SizedBox(
                       height: h * 0.02,
                     ),
-                    customText(h, w, 'Outcome'),
+                    customText(h, w, 'Outcome *'),
                     SizedBox(height: h * 0.015),
                     dropDownMenu(h, w, outcomeDropDown, 5),
                     SizedBox(
                       height: h * 0.02,
                     ),
-                    customText(h, w, 'Resulted in formal referral'),
+                    customText(h, w, 'Resulted in formal referral *'),
                     SizedBox(height: h * 0.015),
                     dropDownMenu(h, w, restuledInFormalReferralDropDown, 6),
                     SizedBox(
@@ -753,31 +789,12 @@ class _FormPageState extends State<FormPage> {
                           //     resultedInFormalReferral +
                           //     ' ' +
                           //     comments);
-                          bool isempty = false;
-                          if (startDate == '___________' ||
-                              startTime == '___________' ||
-                              dob == '___________' ||
-                              comments == '' ||
-                              comments == null ||
-                              urn == '' ||
-                              urn == null) {
-                            isempty = true;
-                          }
-                          for (int c = 0; c < doctorName.length; c++) {
-                            if (doctorName[c][0] == '') {
-                              isempty = true;
-                            }
-                          }
-                          for (int c = 0; c < posCode.length; c++) {
-                            if (posCode[c][1] == '') {
-                              isempty = true;
-                            }
-                          }
-                          if (isempty == true) {
+
+                          if (checkIsEmpty() == true) {
                             showAlertDialog(context);
                           } else {
-                            print("Done");
-                            //showConfirmDialog(context);
+                            //print("Done");
+                            showConfirmDialog(context);
                           }
                         },
                       ),
