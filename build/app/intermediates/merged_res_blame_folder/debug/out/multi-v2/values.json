@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "E:\\POS-nauseum\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/44839bb2c2273d4740a7525da7c26a24/jetified-play-services-basement-17.1.0/res/values/values.xml",
+                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\44839bb2c2273d4740a7525da7c26a24\\jetified-play-services-basement-17.1.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4,7",
                         "startColumns": "0,0",
@@ -21,7 +21,26 @@
                     }
                 },
                 {
-                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/93fbae78ce8dc134e45274d9cd223907/jetified-play-services-base-17.1.0/res/values/values.xml",
+                    "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,830",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "472,996"
+                    },
+                    "to": {
+                        "startLines": "119,124",
+                        "startColumns": "4,4",
+                        "startOffsets": "8978,9275",
+                        "endLines": "123,126",
+                        "endColumns": "12,12",
+                        "endOffsets": "9270,9439"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\93fbae78ce8dc134e45274d9cd223907\\jetified-play-services-base-17.1.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,46",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -40,43 +59,7 @@
                     }
                 },
                 {
-                    "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "173,816",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "465,980"
-                    },
-                    "to": {
-                        "startLines": "119,124",
-                        "startColumns": "4,4",
-                        "startOffsets": "8978,9275",
-                        "endLines": "123,126",
-                        "endColumns": "12,12",
-                        "endOffsets": "9270,9439"
-                    }
-                },
-                {
-                    "source": "/home/soham/flutter_projects/POS-nauseum/build/app/generated/res/google-services/debug/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,281,385,494,614,708",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "194,276,380,489,609,703,774"
-                    },
-                    "to": {
-                        "startLines": "111,112,113,114,115,116,117",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "8183,8327,8409,8513,8622,8742,8836",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "8322,8404,8508,8617,8737,8831,8902"
-                    }
-                },
-                {
-                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/9139e5e581e0cd8befa1c80598ad50b2/coordinatorlayout-1.0.0/res/values/values.xml",
+                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\9139e5e581e0cd8befa1c80598ad50b2\\coordinatorlayout-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,102,3,13",
                         "startColumns": "4,4,4,4",
@@ -95,7 +78,7 @@
                     }
                 },
                 {
-                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/762ac13dbc2467e07314b16cba4467fb/browser-1.0.0/res/values/values.xml",
+                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\762ac13dbc2467e07314b16cba4467fb\\browser-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",
@@ -112,7 +95,24 @@
                     }
                 },
                 {
-                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/f4a15a5606c9a028857d8a3e89eefa0f/core-1.1.0/res/values/values.xml",
+                    "source": "E:\\POS-nauseum\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,281,385,494,614,708",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "194,276,380,489,609,703,774"
+                    },
+                    "to": {
+                        "startLines": "111,112,113,114,115,116,117",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "8183,8327,8409,8513,8622,8742,8836",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "8322,8404,8508,8617,8737,8831,8902"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\f4a15a5606c9a028857d8a3e89eefa0f\\core-1.1.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,83,84,88,89,90,91,98,141,173,210",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
