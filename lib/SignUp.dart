@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -155,9 +156,17 @@ class _SignUpPageState extends State<SignUpPage> {
                             try {
                               print(username);
                               print(password1);
-                              final user = await FirebaseAuth.instance
+                              await FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
                                       email: username, password: password1);
+
+                              await FirebaseFirestore.instance
+                                  .collection("Details")
+                                  .doc(username.substring(0, username.indexOf('@')))
+                                  .set({
+                                'Username': username,
+                              });
+
                               showsnackbar('Registration successful');
                               setState(() {
                                 _isLoading = false;

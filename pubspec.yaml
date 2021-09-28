@@ -34,6 +34,9 @@ dependencies:
   cloud_firestore:
   firebase_core:
   syncfusion_flutter_calendar:
+  downloads_path_provider:
+  csv:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:
