@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pos/Downloaddata.dart';
 import 'package:pos/Form.dart';
 import 'package:pos/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -190,7 +191,12 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DownloadDetails()));
+                          },
                           icon: Icon(
                             Icons.download,
                             color: Colors.green,
