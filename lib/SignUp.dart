@@ -26,19 +26,6 @@ class _SignUpPageState extends State<SignUpPage> {
       backgroundColor: HexColor('#c1e4ba'),
       body: Stack(
         children: [
-          _isLoading
-              ? Container(
-                  height: h,
-                  width: w,
-                  color: Colors.black.withOpacity(0.2),
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      valueColor:
-                          new AlwaysStoppedAnimation<Color>(Colors.green),
-                    ),
-                  ),
-                )
-              : Container(),
           AbsorbPointer(
             absorbing: _isLoading,
             child: Center(
@@ -162,7 +149,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
                               await FirebaseFirestore.instance
                                   .collection("Details")
-                                  .doc(username.substring(0, username.indexOf('@')))
+                                  .doc(username.substring(
+                                      0, username.indexOf('@')))
                                   .set({
                                 'Username': username,
                               });
@@ -198,6 +186,19 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
           ),
+          _isLoading
+              ? Container(
+                  height: h,
+                  width: w,
+                  color: Colors.black.withOpacity(0.2),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.green),
+                    ),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );

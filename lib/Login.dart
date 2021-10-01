@@ -28,7 +28,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   getDatabaseData() async {
-    CollectionReference databaseRef = FirebaseFirestore.instance.collection('Details');
+    CollectionReference databaseRef =
+        FirebaseFirestore.instance.collection('Details');
 
     // extract all username id
     QuerySnapshot userQuerySnapshot = await databaseRef.get();
@@ -36,12 +37,14 @@ class _LoginPageState extends State<LoginPage> {
 
     List<List<dynamic>> rows = [];
     bool firstRun = true;
-    for(var user in users) {
+    for (var user in users) {
       // extract all data from user's collection
-      QuerySnapshot detailQuerySnapshot = await databaseRef.doc(user).collection('Timings').get();
-      final details = detailQuerySnapshot.docs.map((doc) => doc.data()).toList();
+      QuerySnapshot detailQuerySnapshot =
+          await databaseRef.doc(user).collection('Timings').get();
+      final details =
+          detailQuerySnapshot.docs.map((doc) => doc.data()).toList();
 
-      for(var data in details) {
+      for (var data in details) {
         // json encoding of data
         var jsonData = jsonDecode(jsonEncode(data));
 
@@ -55,15 +58,16 @@ class _LoginPageState extends State<LoginPage> {
           'DOB': jsonData['DOB'],
           'URN': jsonData['URN'],
           'Gender': jsonData['Gender'],
-          "Clinicians" : jsonEncode(jsonData['Clinicians']),
+          "Clinicians": jsonEncode(jsonData['Clinicians']),
           'CL Team': jsonData['CL Team'],
           'POS CodeList': jsonEncode(jsonData['POS CodeList']),
           'Outcome': jsonData['Outcome'],
-          'Resulted in formal referral': jsonData['Resulted in formal referral'],
+          'Resulted in formal referral':
+              jsonData['Resulted in formal referral'],
           'Comments': jsonData['Comments'],
         };
 
-        if(firstRun) {
+        if (firstRun) {
           firstRun = !firstRun;
           rows.add(details.keys.toList()); // heading of csv file
         }
@@ -78,11 +82,13 @@ class _LoginPageState extends State<LoginPage> {
   Directory downloadsDirectory = Directory('');
   getDownloadPath() async {
     try {
-      downloadsDirectory = await DownloadsPathProvider.downloadsDirectory; // download folder directory
+      downloadsDirectory = await DownloadsPathProvider
+          .downloadsDirectory; // download folder directory
       print('Download Directory Found!');
 
       // TODO: make an application specific folder inside the download directory
-      details = File(downloadsDirectory.path + "/pos_details.csv"); // make a csv file
+      details =
+          File(downloadsDirectory.path + "/pos_details.csv"); // make a csv file
     } on PlatformException {
       print('Could not get the downloads directory');
     }
@@ -95,11 +101,11 @@ class _LoginPageState extends State<LoginPage> {
     var rows = await getDatabaseData();
     String csv = ListToCsvConverter().convert(rows);
 
-    try{
+    try {
       // populate the csv file
       await details.writeAsString(csv);
       print('CSV File Saved Successfully!');
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
   }
@@ -111,19 +117,6 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: HexColor('#c1e4ba'),
       body: Stack(
         children: [
-          _isLoading
-              ? Container(
-                  height: h,
-                  width: w,
-                  color: Colors.black.withOpacity(0.2),
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      valueColor:
-                          new AlwaysStoppedAnimation<Color>(Colors.green),
-                    ),
-                  ),
-                )
-              : Container(),
           AbsorbPointer(
             absorbing: _isLoading,
             child: Center(
@@ -265,6 +258,19 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
+          _isLoading
+              ? Container(
+                  height: h,
+                  width: w,
+                  color: Colors.black.withOpacity(0.2),
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          new AlwaysStoppedAnimation<Color>(Colors.green),
+                    ),
+                  ),
+                )
+              : Container(),
         ],
       ),
     );
