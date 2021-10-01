@@ -1,19 +1,19 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:1-3:12
-INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:1-3:12
-INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:1-3:12
+ADDED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:1-3:12
+INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:1-3:12
+INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:1-3:12
 	package
-		ADDED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:2:3-43
-		INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
-		INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
+		ADDED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:2:3-43
+		INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
+		INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml:1:11-69
 uses-sdk
-INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
-INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
+INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
+INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
-		ADDED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
-		INJECTED from /Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
+		INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
+		ADDED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml
+		INJECTED from /home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.1.6/android/src/main/AndroidManifest.xml

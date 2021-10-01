@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
     double w = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+          backgroundColor: Colors.white,
           floatingActionButton: FloatingActionButton(
             child: Icon(
               Icons.add,
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                     //height: h / 5,
                     padding: EdgeInsets.only(bottom: 10),
                     child: Card(
-                      elevation: 1,
+                      elevation: 0,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Column(
@@ -121,27 +122,28 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.green, fontSize: h / 35),
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    // IconButton(
-                                    //   onPressed: () {},
-                                    //   icon: Icon(
-                                    //     // Icons.filter_list_alt,
-                                    //     color: HexColor('#c1e4ba'),
-                                    //   ),
-                                    //   splashColor: HexColor('#c1e4ba'),
-                                    // ),
-                                    // IconButton(
-                                    //     onPressed: () {},
-                                    //     icon: Icon(
-                                    //       Icons.view_list,
-                                    //       color: HexColor('#c1e4ba'),
-                                    //     )),
-                                  ],
-                                )
+                                // Row(
+                                //   mainAxisAlignment: MainAxisAlignment.end,
+                                //   children: [
+                                //     IconButton(
+                                //       onPressed: () {},
+                                //       icon: Icon(
+                                //         Icons.filter_list_alt,
+                                //         color: HexColor('#c1e4ba'),
+                                //       ),
+                                //       splashColor: HexColor('#c1e4ba'),
+                                //     ),
+                                //     IconButton(
+                                //         onPressed: () {},
+                                //         icon: Icon(
+                                //           Icons.view_list,
+                                //           color: HexColor('#c1e4ba'),
+                                //         )),
+                                //   ],
+                                // )
                               ],
                             ),
+                            SizedBox(height: 10),
                           ],
                         ),
                       ),
@@ -184,19 +186,32 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(5),
                 child: Align(
                   alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () async {
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
-                      prefs.setString('POS_email', '');
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
-                    },
-                    icon: Icon(
-                      Icons.logout,
-                      color: HexColor('#c1e4ba'),
-                    ),
-                    splashColor: HexColor('#c1e4ba'),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.download,
+                            color: Colors.green,
+                          )),
+                      IconButton(
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setString('POS_email', '');
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
+                        },
+                        icon: Icon(
+                          Icons.logout,
+                          color: Colors.green,
+                        ),
+                        splashColor: HexColor('#c1e4ba'),
+                      ),
+                    ],
                   ),
                 ),
               ),

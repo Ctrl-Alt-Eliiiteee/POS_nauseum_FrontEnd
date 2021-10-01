@@ -3,6 +3,6 @@
 3    package="com.ggichure.github.hexcolor" >
 4
 5    <uses-sdk android:minSdkVersion="16" />
-5-->/Users/savss624/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.3/android/src/main/AndroidManifest.xml
+5-->/home/soham/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/hexcolor-2.0.3/android/src/main/AndroidManifest.xml
 6
 7</manifest>
