@@ -134,8 +134,6 @@ class _DownloadDetailsState extends State<DownloadDetails> {
                                 await LoginPageState().generateCSV();
                               }
                             });
-                            await Future.delayed(
-                                const Duration(seconds: 1), () {});
                             showSnackBar('File Downloaded Successfully');
                           } catch (e) {
                             showSnackBar('Try After Sometime');
