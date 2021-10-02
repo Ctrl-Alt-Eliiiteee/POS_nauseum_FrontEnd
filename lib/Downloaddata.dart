@@ -131,10 +131,15 @@ class _DownloadDetailsState extends State<DownloadDetails> {
                               String ConfEmail = value.data()['AdminID'];
                               if (ConfEmail == _adminUsername.trim() &&
                                   ConfPassword == _adminPassword.trim()) {
+                                print('****************');
                                 await LoginPageState().generateCSV();
+                                showSnackBar('File Downloaded Successfully');
+                              }
+                              else{
+                                showSnackBar('Wrong Credentials');
                               }
                             });
-                            showSnackBar('File Downloaded Successfully');
+
                           } catch (e) {
                             showSnackBar('Try After Sometime');
                           }

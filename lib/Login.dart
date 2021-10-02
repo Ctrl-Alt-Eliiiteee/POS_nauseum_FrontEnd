@@ -88,6 +88,7 @@ class LoginPageState extends State<LoginPage> {
       print('Download Directory Found!');
 
       // TODO: make an application specific folder inside the download directory
+
       details =
           File(downloadsDirectory.path + "/pos_details.csv"); // make a csv file
     } on PlatformException {

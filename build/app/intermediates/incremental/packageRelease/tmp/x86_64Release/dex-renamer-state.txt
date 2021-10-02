@@ -1,4 +1,4 @@
-#Sat Oct 02 23:23:39 IST 2021
+#Sun Oct 03 00:59:52 IST 2021
 base.0=E\:\\POS-nauseum\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
