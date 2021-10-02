@@ -13,14 +13,14 @@ import 'package:downloads_path_provider/downloads_path_provider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
 String username = '', password = '';
 
 bool _isLoading = false;
 
-class _LoginPageState extends State<LoginPage> {
+class LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
@@ -206,21 +206,23 @@ class _LoginPageState extends State<LoginPage> {
                           SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           try {
+                            // final check = await FirebaseAuth.instance.sendPasswordResetEmail(email: username);
                             final check = await FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
-                                    email: username, password: password)
-                                .then((value) {
-                              prefs.setString('POS_email', username);
-                              setState(() {
-                                _isLoading = false;
-                              });
+                                    email: username, password: password);
+
+                            prefs.setString('POS_email', username);
+                            setState(() {
+                              _isLoading = false;
+                            });
+                            if (check.user.emailVerified) {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => HomePage(
                                             username: username,
                                           )));
-                            });
+                            } 
                           } catch (e) {
                             setState(() {
                               _isLoading = false;

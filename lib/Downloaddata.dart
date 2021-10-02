@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import './Login.dart';
 class DownloadDetails extends StatefulWidget {
   @override
   _DownloadDetailsState createState() => _DownloadDetailsState();
@@ -11,8 +12,8 @@ String _originalPassword;
 
 bool _isLoading = false;
 
-String _adminUsername;
-String _adminPassword;
+String _adminUsername='';
+String _adminPassword='';
 
 class _DownloadDetailsState extends State<DownloadDetails> {
   @override
@@ -119,12 +120,27 @@ class _DownloadDetailsState extends State<DownloadDetails> {
                             ))),
                         onPressed: () async {
                           // :TODO add the download file code
-
                           setState(() {
                             _isLoading = true;
                           });
-                          await Future.delayed(
-                              const Duration(seconds: 1), () {});
+                          try {
+                            await FirebaseFirestore.instance.collection(
+                                "AdminCred").doc('Admin').get().then((
+                                value) async {
+                              String ConfPassword = value.data()['Password'];
+                              String ConfEmail = value.data()['AdminID'];
+                              if (ConfEmail == _adminUsername.trim() &&
+                                  ConfPassword == _adminPassword.trim()) {
+                                await LoginPageState().generateCSV();
+                              }
+                            });
+                            await Future.delayed(
+                                const Duration(seconds: 1), () {});
+                            showSnackBar('File Downloaded Successfully');
+                          }
+                          catch(e){
+                            showSnackBar('Try After Sometime');
+                          }
                           setState(() {
                             _isLoading = false;
                           });
@@ -183,10 +199,10 @@ class _DownloadDetailsState extends State<DownloadDetails> {
   }
 }
 
-String _previousUsername;
-String _previousPassword;
-String _newUsername;
-String _newPassword;
+String _previousUsername='';
+String _previousPassword='';
+String _newUsername='';
+String _newPassword='';
 
 bool _isChangeLoading = false;
 
@@ -196,6 +212,10 @@ class ChangeAdminDetails extends StatefulWidget {
 }
 
 class _ChangeAdminDetailsState extends State<ChangeAdminDetails> {
+  void showSnackBar(e) {
+    final snackbar = SnackBar(content: Text(e));
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+  }
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -225,11 +245,11 @@ class _ChangeAdminDetailsState extends State<ChangeAdminDetails> {
                       SizedBox(height: h * 0.08),
                       customTextfield(h, w, "Previous Admin ID", 0),
                       SizedBox(height: h * 0.02),
-                      customTextfield(h, w, "Previous Admin password", 0),
+                      customTextfield(h, w, "Previous Admin password", 1),
                       SizedBox(height: h * 0.02),
-                      customTextfield(h, w, "New Admin ID", 0),
+                      customTextfield(h, w, "New Admin ID", 2),
                       SizedBox(height: h * 0.02),
-                      customTextfield(h, w, "New Password", 0),
+                      customTextfield(h, w, "New Password", 3),
                       SizedBox(height: h * 0.06),
                       TextButton(
                         style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
@@ -252,6 +272,35 @@ class _ChangeAdminDetailsState extends State<ChangeAdminDetails> {
                           setState(() {
                             _isChangeLoading = true;
                           });
+                          try{
+                            bool status=false;
+                            await FirebaseFirestore.instance.collection(
+                                "AdminCred").doc('Admin').get().then((
+                                value) async {
+                              String ConfPassword = value.data()['Password'];
+                              String ConfEmail = value.data()['AdminID'];
+                              if (ConfEmail == _previousUsername.trim() &&
+                                  ConfPassword == _previousPassword.trim()) {
+                                   status=true;
+                                   print(status);
+                              }
+                            });
+                            print(_newPassword.trim() +" "+ _newUsername.trim());
+                            if(status&&_newPassword.trim().length!=0&&_newUsername.trim().length!=0){
+                              await FirebaseFirestore.instance.collection(
+                                  "AdminCred").doc('Admin').set({
+                                'AdminID' : _newUsername.trim(),
+                                'Password' : _newPassword.trim(),
+                              });
+                              showSnackBar('Credentials Updated Successfully');
+                            }
+                            else{
+                              showSnackBar('Wrong Credentials');
+                            }
+
+                          }catch(e){
+                            showSnackBar('Wrong Credentials');
+                          }
                           await Future.delayed(
                               const Duration(seconds: 1), () {});
                           setState(() {

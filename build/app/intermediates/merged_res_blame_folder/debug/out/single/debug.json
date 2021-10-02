@@ -1,26 +1,26 @@
 [
     {
-        "merged": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+        "merged": "E:\\POS-nauseum\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+        "merged": "E:\\POS-nauseum\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+        "merged": "E:\\POS-nauseum\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/res/merged/debug/drawable-v21_launch_background.xml.flat",
-        "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/drawable-v21/launch_background.xml"
+        "merged": "E:\\POS-nauseum\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "E:\\POS-nauseum\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "E:\\POS-nauseum\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
+        "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
     }
 ]

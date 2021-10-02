@@ -143,10 +143,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             try {
                               print(username);
                               print(password1);
-                              await FirebaseAuth.instance
+                              final user = await FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
                                       email: username, password: password1);
-
+                              await user.user.sendEmailVerification();
                               await FirebaseFirestore.instance
                                   .collection("Details")
                                   .doc(username.substring(
@@ -155,7 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 'Username': username,
                               });
 
-                              showsnackbar('Registration successful');
+                              showsnackbar('Verification Email Sent on the provided Email ID');
                               setState(() {
                                 _isLoading = false;
                               });
