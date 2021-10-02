@@ -1,46 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\POS-nauseum\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "/home/soham/flutter_projects/POS-nauseum/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
                 {
-                    "source": "E:\\POS-nauseum\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "176,830",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "472,996"
-                    },
-                    "to": {
-                        "startLines": "119,124",
-                        "startColumns": "4,4",
-                        "startOffsets": "8978,9275",
-                        "endLines": "123,126",
-                        "endColumns": "12,12",
-                        "endOffsets": "9270,9439"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\14e561dfe998324f0993f7eed2935f20\\jetified-play-services-basement-17.1.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "4,7",
-                        "startColumns": "0,0",
-                        "startOffsets": "238,401",
-                        "endColumns": "63,166",
-                        "endOffsets": "301,567"
-                    },
-                    "to": {
-                        "startLines": "91,101",
-                        "startColumns": "4,4",
-                        "startOffsets": "5712,6890",
-                        "endColumns": "67,166",
-                        "endOffsets": "5775,7052"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\0813e45a0b3806629b40dbeb70c75a60\\jetified-play-services-base-17.1.0\\res\\values\\values.xml",
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/0813e45a0b3806629b40dbeb70c75a60/jetified-play-services-base-17.1.0/res/values/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,33,46",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -59,7 +23,60 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\afd2d987ef6a954ce95af3f20bd0f6cf\\browser-1.0.0\\res\\values\\values.xml",
+                    "source": "/home/soham/flutter_projects/POS-nauseum/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "173,816",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "465,980"
+                    },
+                    "to": {
+                        "startLines": "119,124",
+                        "startColumns": "4,4",
+                        "startOffsets": "8978,9275",
+                        "endLines": "123,126",
+                        "endColumns": "12,12",
+                        "endOffsets": "9270,9439"
+                    }
+                },
+                {
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/14e561dfe998324f0993f7eed2935f20/jetified-play-services-basement-17.1.0/res/values/values.xml",
+                    "from": {
+                        "startLines": "4,7",
+                        "startColumns": "0,0",
+                        "startOffsets": "238,401",
+                        "endColumns": "63,166",
+                        "endOffsets": "301,567"
+                    },
+                    "to": {
+                        "startLines": "91,101",
+                        "startColumns": "4,4",
+                        "startOffsets": "5712,6890",
+                        "endColumns": "67,166",
+                        "endOffsets": "5775,7052"
+                    }
+                },
+                {
+                    "source": "/home/soham/flutter_projects/POS-nauseum/build/app/generated/res/google-services/debug/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,281,385,494,614,708",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "194,276,380,489,609,703,774"
+                    },
+                    "to": {
+                        "startLines": "111,112,113,114,115,116,117",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "8183,8327,8409,8513,8622,8742,8836",
+                        "endColumns": "143,81,103,108,119,93,70",
+                        "endOffsets": "8322,8404,8508,8617,8737,8831,8902"
+                    }
+                },
+                {
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/afd2d987ef6a954ce95af3f20bd0f6cf/browser-1.0.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",
@@ -76,26 +93,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\a935fa587df289485954d05015b0662e\\coordinatorlayout-1.0.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,102,3,13",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,5935,116,724",
-                        "endLines": "2,104,12,101",
-                        "endColumns": "60,12,24,24",
-                        "endOffsets": "111,6075,719,5930"
-                    },
-                    "to": {
-                        "startLines": "2,140,150,160",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "105,10341,10784,11392",
-                        "endLines": "2,142,159,248",
-                        "endColumns": "60,12,24,24",
-                        "endOffsets": "161,10481,11387,16598"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Parth Pandey\\.gradle\\caches\\transforms-2\\files-2.1\\3c8fd1bfddb99a7a7e21faa1397acdb4\\core-1.1.0\\res\\values\\values.xml",
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/3c8fd1bfddb99a7a7e21faa1397acdb4/core-1.1.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,83,84,88,89,90,91,98,141,173,210",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -114,20 +112,22 @@
                     }
                 },
                 {
-                    "source": "E:\\POS-nauseum\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "source": "/home/soham/.gradle/caches/transforms-2/files-2.1/a935fa587df289485954d05015b0662e/coordinatorlayout-1.0.0/res/values/values.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,281,385,494,614,708",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "194,276,380,489,609,703,774"
+                        "startLines": "2,102,3,13",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,5935,116,724",
+                        "endLines": "2,104,12,101",
+                        "endColumns": "60,12,24,24",
+                        "endOffsets": "111,6075,719,5930"
                     },
                     "to": {
-                        "startLines": "111,112,113,114,115,116,117",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "8183,8327,8409,8513,8622,8742,8836",
-                        "endColumns": "143,81,103,108,119,93,70",
-                        "endOffsets": "8322,8404,8508,8617,8737,8831,8902"
+                        "startLines": "2,140,150,160",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "105,10341,10784,11392",
+                        "endLines": "2,142,159,248",
+                        "endColumns": "60,12,24,24",
+                        "endOffsets": "161,10481,11387,16598"
                     }
                 }
             ]

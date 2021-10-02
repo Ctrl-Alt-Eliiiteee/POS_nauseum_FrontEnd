@@ -2,18 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import './Login.dart';
+
 class DownloadDetails extends StatefulWidget {
   @override
   _DownloadDetailsState createState() => _DownloadDetailsState();
 }
 
-String _originalUsername;
-String _originalPassword;
-
 bool _isLoading = false;
 
-String _adminUsername='';
-String _adminPassword='';
+String _adminUsername = '';
+String _adminPassword = '';
 
 class _DownloadDetailsState extends State<DownloadDetails> {
   @override
@@ -124,9 +122,11 @@ class _DownloadDetailsState extends State<DownloadDetails> {
                             _isLoading = true;
                           });
                           try {
-                            await FirebaseFirestore.instance.collection(
-                                "AdminCred").doc('Admin').get().then((
-                                value) async {
+                            await FirebaseFirestore.instance
+                                .collection("AdminCred")
+                                .doc('Admin')
+                                .get()
+                                .then((value) async {
                               String ConfPassword = value.data()['Password'];
                               String ConfEmail = value.data()['AdminID'];
                               if (ConfEmail == _adminUsername.trim() &&
@@ -137,8 +137,7 @@ class _DownloadDetailsState extends State<DownloadDetails> {
                             await Future.delayed(
                                 const Duration(seconds: 1), () {});
                             showSnackBar('File Downloaded Successfully');
-                          }
-                          catch(e){
+                          } catch (e) {
                             showSnackBar('Try After Sometime');
                           }
                           setState(() {
@@ -199,10 +198,10 @@ class _DownloadDetailsState extends State<DownloadDetails> {
   }
 }
 
-String _previousUsername='';
-String _previousPassword='';
-String _newUsername='';
-String _newPassword='';
+String _previousUsername = '';
+String _previousPassword = '';
+String _newUsername = '';
+String _newPassword = '';
 
 bool _isChangeLoading = false;
 
@@ -216,6 +215,7 @@ class _ChangeAdminDetailsState extends State<ChangeAdminDetails> {
     final snackbar = SnackBar(content: Text(e));
     ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -272,33 +272,39 @@ class _ChangeAdminDetailsState extends State<ChangeAdminDetails> {
                           setState(() {
                             _isChangeLoading = true;
                           });
-                          try{
-                            bool status=false;
-                            await FirebaseFirestore.instance.collection(
-                                "AdminCred").doc('Admin').get().then((
-                                value) async {
+                          try {
+                            bool status = false;
+                            await FirebaseFirestore.instance
+                                .collection("AdminCred")
+                                .doc('Admin')
+                                .get()
+                                .then((value) async {
                               String ConfPassword = value.data()['Password'];
                               String ConfEmail = value.data()['AdminID'];
                               if (ConfEmail == _previousUsername.trim() &&
                                   ConfPassword == _previousPassword.trim()) {
-                                   status=true;
-                                   print(status);
+                                status = true;
+                                print(status);
                               }
                             });
-                            print(_newPassword.trim() +" "+ _newUsername.trim());
-                            if(status&&_newPassword.trim().length!=0&&_newUsername.trim().length!=0){
-                              await FirebaseFirestore.instance.collection(
-                                  "AdminCred").doc('Admin').set({
-                                'AdminID' : _newUsername.trim(),
-                                'Password' : _newPassword.trim(),
+                            print(_newPassword.trim() +
+                                " " +
+                                _newUsername.trim());
+                            if (status &&
+                                _newPassword.trim().length != 0 &&
+                                _newUsername.trim().length != 0) {
+                              await FirebaseFirestore.instance
+                                  .collection("AdminCred")
+                                  .doc('Admin')
+                                  .set({
+                                'AdminID': _newUsername.trim(),
+                                'Password': _newPassword.trim(),
                               });
                               showSnackBar('Credentials Updated Successfully');
-                            }
-                            else{
+                            } else {
                               showSnackBar('Wrong Credentials');
                             }
-
-                          }catch(e){
+                          } catch (e) {
                             showSnackBar('Wrong Credentials');
                           }
                           await Future.delayed(

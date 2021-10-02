@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:pos/Cal.dart';
+import 'package:pos/Forgotpassword.dart';
 import 'package:pos/SignUp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:csv/csv.dart';
@@ -183,7 +184,25 @@ class LoginPageState extends State<LoginPage> {
                           },
                         ),
                       ),
-                      SizedBox(height: h * 0.06),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ForgotPassword()));
+                          },
+                          child: Text(
+                            "Forgot Password?",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: w * 0.04,
+                                fontWeight: FontWeight.w300),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: h * 0.02),
                       TextButton(
                         style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
                         child: Container(
@@ -222,7 +241,7 @@ class LoginPageState extends State<LoginPage> {
                                       builder: (context) => HomePage(
                                             username: username,
                                           )));
-                            } 
+                            }
                           } catch (e) {
                             setState(() {
                               _isLoading = false;
