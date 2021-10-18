@@ -167,6 +167,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               setState(() {
                                 _isLoading = false;
                               });
+                              print(e);
                               showsnackbar('Email Invalid OR Aleady taken');
                             }
                           } else {

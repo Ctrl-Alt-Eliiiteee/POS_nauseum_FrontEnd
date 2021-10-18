@@ -11,6 +11,7 @@ import 'package:pos/SignUp.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:csv/csv.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
+import 'package:url_launcher_web/url_launcher_web.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -79,25 +80,25 @@ class LoginPageState extends State<LoginPage> {
     return rows;
   }
 
-  File details = File('');
-  Directory downloadsDirectory = Directory('');
-  getDownloadPath() async {
-    try {
-      downloadsDirectory = await DownloadsPathProvider
-          .downloadsDirectory; // download folder directory
-      print('Download Directory Found!');
-
-      // TODO: make an application specific folder inside the download directory
-
-      details =
-          File(downloadsDirectory.path + "/pos_details.csv"); // make a csv file
-    } on PlatformException {
-      print('Could not get the downloads directory');
-    }
-  }
+  // File details = File('');
+  // Directory downloadsDirectory = Directory('');
+  // getDownloadPath() async {
+  //   try {
+  //     downloadsDirectory = await DownloadsPathProvider
+  //         .downloadsDirectory; // download folder directory
+  //     print('Download Directory Found!');
+  //
+  //     // TODO: make an application specific folder inside the download directory
+  //
+  //     details =
+  //         File(downloadsDirectory.path + "/pos_details.csv"); // make a csv file
+  //   } on PlatformException {
+  //     print('Could not get the downloads directory');
+  //   }
+  // }
 
   generateCSV() async {
-    await getDownloadPath();
+    // await getDownloadPath();
 
     // extract all data as a 2D List
     var rows = await getDatabaseData();
@@ -105,7 +106,14 @@ class LoginPageState extends State<LoginPage> {
 
     try {
       // populate the csv file
-      await details.writeAsString(csv);
+
+      // For web
+      final content = base64Encode(csv.codeUnits);
+      final url = 'data:application/csv;base64,$content';
+      await UrlLauncherPlugin().launch(url);
+
+      // For Android
+      // await details.writeAsString(csv);
       print('CSV File Saved Successfully!');
     } catch (e) {
       print(e);
@@ -248,6 +256,7 @@ class LoginPageState extends State<LoginPage> {
                               _isLoading = false;
                             });
                             showSnackBar("Invalid email or password");
+                            print(e);
                           }
                         },
                       ),
