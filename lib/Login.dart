@@ -17,7 +17,6 @@ class LoginPage extends StatefulWidget {
   @override
   LoginPageState createState() => LoginPageState();
 }
-
 String username = '', password = '';
 
 bool _isLoading = false;
